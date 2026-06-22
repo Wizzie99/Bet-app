@@ -211,8 +211,8 @@ export default function Hero() {
 
               {/* Headline */}
               <h1
-                className="font-['Playfair_Display',serif] italic font-bold text-white leading-[1.05] tracking-[-0.02em]"
-                style={{ fontSize: 'clamp(42px, 5.5vw, 80px)', maxWidth: 520 }}
+                className="text-white leading-[1.05]"
+                style={{ fontFamily: "'Lastik', 'Georgia', serif", fontWeight: 400, fontSize: 'clamp(42px, 5.5vw, 80px)', letterSpacing: '-0.02em', maxWidth: 520 }}
               >
                 First in Class
                 <br />

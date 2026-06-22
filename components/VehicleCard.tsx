@@ -123,7 +123,7 @@ export default function VehicleCard({
   };
 
   return (
-    <div className="flex items-center px-4 py-2 shrink-0 snap-start w-[300px] md:w-[360px]">
+    <div className="flex items-center px-4 py-2 shrink-0 snap-start w-[300px] md:w-[360px] min-w-[280px]">
       <div
         className="flex flex-col items-start w-full rounded-[20px] p-0.5"
         style={{ background: '#131618' }}

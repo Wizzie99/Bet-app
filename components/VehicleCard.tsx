@@ -359,7 +359,7 @@ export default function VehicleCard({
                   color: '#191a19',
                 }}
               >
-                Reserve
+                Reserve now
               </span>
               <span
                 className="flex items-center justify-center rounded-full shrink-0"

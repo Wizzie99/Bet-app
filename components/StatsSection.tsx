@@ -34,10 +34,10 @@ export default function StatsSection() {
               lineHeight: 1.2,
               letterSpacing: '-0.96px',
               color: '#eff0eb',
-              maxWidth: 364,
+              maxWidth: 520,
             }}
           >
-            Trusted by<br />Boston for years
+            Boston has trusted us<br />with 50,000 rides
           </h2>
 
           <div className="flex flex-col gap-8 max-w-[530px]">
@@ -51,51 +51,51 @@ export default function StatsSection() {
                 color: '#eff0eb',
               }}
             >
-              We&apos;ve built our reputation on reliability and excellence. These numbers tell our story.
+              Six years of service, a 98% satisfaction rate, and a fleet that&apos;s never more than a few years old. The numbers are the story.
             </p>
 
             <div className="flex items-center gap-4">
-              {/* Ghost button — Contact */}
-              <Link
-                href="/contact"
+              {/* Outline button — Call */}
+              <a
+                href="tel:+18579304661"
                 className="flex items-center gap-1.5 px-5 py-3 rounded-md transition-colors hover:bg-white/10"
               >
                 <span
-                  className="uppercase"
                   style={{
                     fontFamily: "'Geist Mono', monospace",
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: '20px',
                     letterSpacing: '-0.48px',
+                    textTransform: 'uppercase',
                     color: '#eff0eb',
                   }}
                 >
-                  Contact
+                  Call (857) 930-4661
                 </span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M9 18l6-6-6-6" stroke="#eff0eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </Link>
+              </a>
 
-              {/* Filled button — Book */}
+              {/* Filled button — Get a quote */}
               <Link
                 href="/reserve"
                 className="flex items-center gap-1.5 px-5 py-3 rounded-md transition-opacity hover:opacity-90"
                 style={{ background: '#eff0eb' }}
               >
                 <span
-                  className="uppercase"
                   style={{
                     fontFamily: "'Geist Mono', monospace",
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: '20px',
                     letterSpacing: '-0.48px',
+                    textTransform: 'uppercase',
                     color: '#595a59',
                   }}
                 >
-                  Book
+                  Get a quote
                 </span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M7 17L17 7M17 7H7M17 7v10" stroke="#595a59" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

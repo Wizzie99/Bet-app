@@ -1,0 +1,752 @@
+.page {
+  /* ── Design tokens (Figma variable names) ── */
+  --surface-background: #eff0eb;
+  --surface-foreground: #131618;
+  --grey-500: #131618;
+  --grey-400: #24282b;
+  --board-inner: #111618;
+  --border-default: #515c65;
+  --border-default-light: #898987;
+  --border-lighter: #bbbcb8;
+  --white-400: #f3f4f1;
+  --white-500: #eff0eb;
+  --white-600: #bbbcb8;
+  --white-950: #191a19;
+  --text-title: #2e2e2d;
+  --text-title-dark: #dee4eb;
+  --text-body: #595a59;
+  --text-body-dark: #bbbcb8;
+  --button-secondary: #eff0eb;
+  --border-selected: #1c60ff;
+
+  --font-display: "Lastik", "Instrument Serif", Georgia, serif;
+
+  background: var(--surface-background);
+  color: var(--text-title);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Licensed display face — supply /public/fonts/Lastik-Free.woff2 */
+@font-face {
+  font-family: "Lastik";
+  src: url("/fonts/Lastik-Free.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.page :focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ══ Breadcrumb — pt26, px40, 13px ══ */
+.breadcrumb {
+  width: 100%;
+  max-width: 1440px;
+  padding: 26px 40px 0;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: var(--text-body);
+}
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--text-title);
+}
+.breadcrumbCurrent {
+  color: var(--text-title);
+}
+
+/* ══ Shell — w1440, pt22 pb112, left column gap 56 ══ */
+.shell {
+  width: 100%;
+  max-width: 1440px;
+  padding: 22px 0 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+/* ══ Gallery card — grey/500, p2, gap2 ══ */
+.galleryCard {
+  background: var(--grey-500);
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1436 / 708;
+  overflow: hidden;
+}
+/* Stacked slides cross-fade as the active photo changes. */
+.stageSlide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+.stageSlideActive {
+  opacity: 1;
+  visibility: visible;
+}
+.stageImg {
+  object-fit: cover;
+}
+
+/* ── Previous / next controls ── */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(243, 244, 241, 0.25);
+  border-radius: 999px;
+  background: rgba(19, 22, 24, 0.5);
+  color: var(--white-400);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.navPrev {
+  left: 16px;
+}
+.navNext {
+  right: 16px;
+}
+.navBtn:hover {
+  background: var(--border-selected);
+  border-color: var(--border-selected);
+  transform: translateY(-50%) scale(1.06);
+}
+.navBtn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+.navIcon {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* Announces the active photo to screen readers; hidden visually. */
+.stageStatus {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.tag {
+  position: absolute;
+  left: 14px;
+  top: 19px;
+  margin: 0;
+  background: var(--button-secondary);
+  color: var(--white-950);
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: -0.33px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.thumbs {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+}
+.thumb {
+  flex: 1 0 0;
+  min-width: 0;
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  background: var(--grey-400);
+  /* reset button chrome */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+/* Accent ring painted above the photo to mark the active / hovered thumb. */
+.thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+  pointer-events: none;
+}
+.thumb:hover {
+  opacity: 0.85;
+}
+.thumb:hover::after {
+  border-color: rgba(28, 96, 255, 0.5);
+}
+.thumbActive {
+  background: var(--surface-foreground);
+  opacity: 1;
+}
+.thumbActive::after {
+  border-color: var(--border-selected);
+}
+.thumbImg {
+  object-fit: cover;
+}
+
+/* ══ Photography placeholders — remove once /public/fleet/* lands ══ */
+.ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(187, 188, 184, 0.14) 0 1px,
+      transparent 1px 14px
+    ),
+    var(--grey-400);
+}
+.phLabel {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white-600);
+}
+.phLabelLg {
+  font-size: 13px;
+  line-height: 20px;
+  max-width: 420px;
+}
+
+/* ══ Nameplate — px40, gap20 ══ */
+.nameplate {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+}
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.36px;
+  color: var(--text-body);
+  white-space: pre;
+}
+.h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -1.28px;
+  color: var(--text-title);
+}
+.blurb {
+  margin: 0;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: -0.6px;
+  color: var(--text-body);
+  max-width: 789px;
+}
+
+/* spec chips — grey/400 pills, 20px icons */
+.chips {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.chip {
+  background: var(--grey-400);
+  border-radius: 999px;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--white-500);
+}
+.chip span {
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: var(--white-500);
+  white-space: nowrap;
+}
+
+/* ══ Sections — px40, gap26 ══ */
+.section {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: flex-start;
+  width: 100%;
+}
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  width: 100%;
+}
+.h2 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: var(--text-title);
+}
+.h2Display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: var(--text-title);
+}
+.lede {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+  color: var(--text-body);
+  max-width: 638px;
+}
+
+/* included list — 2 cols, 783px, gap32, 12px checks */
+.includedGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  width: 783px;
+  max-width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.includedRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-lighter);
+}
+.includedRow svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--text-title);
+}
+.includedRow span {
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  color: var(--text-title);
+}
+
+/* ══ Flight board — r20 shell / r18 inner, #111618 ══ */
+.boardCard {
+  background: var(--grey-500);
+  padding: 2px;
+  border-radius: 20px;
+  width: 783px;
+  max-width: 100%;
+}
+.boardInner {
+  background: var(--board-inner);
+  border-radius: 18px;
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+}
+.boardHead {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-default-light);
+}
+.boardTitle {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+  color: var(--white-400);
+}
+.boardLive {
+  margin-left: auto;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: -0.33px;
+  color: var(--white-600);
+  white-space: nowrap;
+}
+.flightRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+}
+.flightRowDivided {
+  border-top: 1px dashed var(--border-default-light);
+}
+.flightCode {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: var(--white-400);
+  width: 88px;
+  flex-shrink: 0;
+}
+.flightRoute {
+  font-size: 14px;
+  letter-spacing: -0.42px;
+  color: var(--white-600);
+  white-space: nowrap;
+}
+.flightStatus {
+  margin-left: auto;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: var(--white-600);
+  white-space: nowrap;
+}
+.flightStatusHot {
+  margin-left: auto;
+  background: var(--button-secondary);
+  color: var(--white-950);
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.boardNote {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-default-light);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.39px;
+  color: var(--white-600);
+  max-width: 486px;
+}
+
+/* ══ Before you book — 2×2, ruled rows ══ */
+.policyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+  width: 100%;
+  max-width: 886px;
+}
+.policyCard {
+  border-top: 1px solid var(--border-default-light);
+  border-bottom: 1px solid var(--border-default-light);
+  padding: 17px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.policyTitle {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.45px;
+  color: var(--text-title);
+}
+.policyBody {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: -0.45px;
+  color: var(--text-title);
+  max-width: 395px;
+}
+
+/* ══ Alternates — 256.078 cards, p1.423, r11.381 ══ */
+.altRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.altCard {
+  background: var(--grey-500);
+  padding: 1.423px;
+  border-radius: 11.381px;
+  width: 256.078px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  overflow: hidden;
+}
+.altCard:hover .altNameMain {
+  color: var(--white-500);
+}
+.altImageWrap {
+  position: relative;
+  width: 100%;
+  height: 192.059px;
+  border-radius: 9.959px;
+  overflow: hidden;
+}
+.altImage {
+  object-fit: cover;
+}
+.altScrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55.484px;
+  background: linear-gradient(
+    180deg,
+    rgba(19, 22, 24, 0) 0%,
+    rgba(19, 22, 24, 0.78) 64.476%,
+    rgba(19, 22, 24, 0.93) 81.704%,
+    rgb(19, 22, 24) 100%
+  );
+  pointer-events: none;
+}
+.altName {
+  background: var(--surface-foreground);
+  border-bottom: 0.356px solid var(--border-default);
+  padding: 5.691px 11.381px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.845px;
+}
+.altNameMain {
+  font-size: 12px;
+  line-height: 17.072px;
+  letter-spacing: -0.36px;
+  color: var(--white-400);
+}
+.altNameSub {
+  font-size: 9px;
+  line-height: 11.381px;
+  letter-spacing: -0.27px;
+  color: var(--white-600);
+}
+.altSpecs {
+  background: var(--grey-500);
+  border-radius: 0 0 8.536px 8.536px;
+  padding: 11.381px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.altChip {
+  background: var(--grey-400);
+  border-radius: 999px;
+  padding: 2.845px 5.691px;
+  display: flex;
+  align-items: center;
+  gap: 2.845px;
+  font-size: 10px;
+  line-height: 14.227px;
+  letter-spacing: -0.3px;
+  color: var(--white-500);
+  white-space: nowrap;
+}
+.altChip svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--white-500);
+}
+.altDivider {
+  width: 1px;
+  height: 19.917px;
+  background: var(--border-default-light);
+  flex-shrink: 0;
+}
+
+/* ══ Fixed reserve bar — always visible in the viewport ══ */
+.reserveBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--border-selected);
+  display: flex;
+  justify-content: center;
+  padding: 32px 0 calc(32px + env(safe-area-inset-bottom));
+  z-index: 30;
+}
+.reserveLink {
+  font-size: 24px;
+  letter-spacing: -0.39px;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.reserveLink:hover {
+  text-decoration: underline;
+}
+
+/* ══ Responsive — frame is 1440 desktop ══ */
+@media (max-width: 1100px) {
+  .includedGrid,
+  .boardCard {
+    width: 100%;
+  }
+  .h1 {
+    font-size: 52px;
+    letter-spacing: -1.04px;
+  }
+}
+
+@media (max-width: 760px) {
+  .breadcrumb,
+  .nameplate,
+  .section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .shell {
+    gap: 44px;
+    padding-bottom: 88px;
+  }
+  .h1 {
+    font-size: 40px;
+    letter-spacing: -0.8px;
+  }
+  .blurb {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .h2,
+  .h2Display {
+    font-size: 26px;
+    letter-spacing: -0.52px;
+  }
+  /* Taller stage so the car isn't a thin letterbox strip on a phone. */
+  .stage {
+    aspect-ratio: 4 / 3;
+  }
+  /* Thumbs become a horizontally scrollable strip of fixed-width tiles
+     instead of squeezing every photo into one row. */
+  .thumbs {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .thumbs::-webkit-scrollbar {
+    display: none;
+  }
+  .thumb {
+    flex: 0 0 38%;
+    height: 96px;
+    scroll-snap-align: start;
+  }
+  .navBtn {
+    width: 40px;
+    height: 40px;
+  }
+  .navPrev {
+    left: 10px;
+  }
+  .navNext {
+    right: 10px;
+  }
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
+  .phLabel {
+    font-size: 9px;
+    line-height: 13px;
+  }
+  .includedGrid,
+  .policyGrid {
+    grid-template-columns: 1fr;
+  }
+  .flightRow {
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .flightStatus,
+  .flightStatusHot {
+    margin-left: 0;
+  }
+  .altCard {
+    width: 100%;
+  }
+  .reserveBar {
+    padding: 20px 0 calc(20px + env(safe-area-inset-bottom));
+  }
+  .reserveLink {
+    font-size: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

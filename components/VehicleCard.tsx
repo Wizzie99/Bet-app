@@ -4,79 +4,13 @@ import { useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
+import { ArrowOutwardIcon, CarIcon, ChevronLeftIcon, ChevronRightIcon, LuggageIcon, SeatIcon } from './FleetIcons';
 
-function SeatIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="13" cy="4" r="1.5" fill="#eff0eb" />
-      <path
-        d="M7 8h5l1 4H8L7 8z"
-        fill="#eff0eb"
-      />
-      <path
-        d="M8 12v4h7v-4"
-        stroke="#eff0eb"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M15 16h2"
-        stroke="#eff0eb"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function LuggageIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="5" y="9" width="14" height="11" rx="1.5" stroke="#eff0eb" strokeWidth="1.5" />
-      <path
-        d="M9 9V7a3 3 0 0 1 6 0v2"
-        stroke="#eff0eb"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <line x1="12" y1="12" x2="12" y2="17" stroke="#eff0eb" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="9.5" y1="14.5" x2="14.5" y2="14.5" stroke="#eff0eb" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CarIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M5 11l1.5-4.5h11L19 11"
-        stroke="#eff0eb"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect x="3" y="11" width="18" height="7" rx="1.5" stroke="#eff0eb" strokeWidth="1.5" />
-      <circle cx="7.5" cy="18" r="1.5" fill="#eff0eb" />
-      <circle cx="16.5" cy="18" r="1.5" fill="#eff0eb" />
-    </svg>
-  );
-}
-
-function ArrowOutwardIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M9 5H19M19 5V15M19 5L5 19"
-        stroke="#eff0eb"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+/**
+ * Spec icons shrink one step below `sm` so that the widest labels
+ * (Sprinter: Seats:12 / Luggage:10) still fit inside the card.
+ */
+const CHIP_ICON = 'w-4 h-4 sm:w-5 sm:h-5 shrink-0';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -86,9 +20,10 @@ export interface VehicleCardProps {
   seats: number;
   luggage: number;
   year: number;
-  pricePerHour: number;
   images: { src: string; alt: string }[];
   reserveHref?: string;
+  /** Links Details through to /fleet/[slug]. */
+  detailHref: string;
 }
 
 // ─── VehicleCard ──────────────────────────────────────────────────────────────
@@ -99,9 +34,9 @@ export default function VehicleCard({
   seats,
   luggage,
   year,
-  pricePerHour,
   images,
   reserveHref = '/reserve',
+  detailHref,
 }: VehicleCardProps) {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef(0);
@@ -111,8 +46,8 @@ export default function VehicleCard({
     [images.length],
   );
 
-  const next = useCallback(() => goTo(current + 1), [current, goTo]);
-  const prev = useCallback(() => goTo(current - 1), [current, goTo]);
+  const next = useCallback(() => setCurrent((c) => (c + 1) % images.length), [images.length]);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + images.length) % images.length), [images.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -123,7 +58,10 @@ export default function VehicleCard({
   };
 
   return (
-    <div className="flex items-center px-4 py-2 shrink-0 snap-start w-[300px] md:w-[360px] min-w-[280px]">
+    <div
+      data-fleet-card
+      className="flex items-center px-4 py-2 shrink-0 snap-start w-[88vw] max-w-[360px] sm:w-[340px] md:w-[360px]"
+    >
       <div
         className="flex flex-col items-start w-full rounded-[20px] p-0.5"
         style={{ background: '#131618' }}
@@ -154,29 +92,47 @@ export default function VehicleCard({
             </div>
           ))}
 
-          {/* Dot indicators */}
           {images.length > 1 && (
-            <div
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-[6px] z-10"
-              role="tablist"
-              aria-label="Image indicators"
-            >
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  role="tab"
-                  aria-selected={i === current}
-                  aria-label={`View image ${i + 1}`}
-                  onClick={() => goTo(i)}
-                  className={[
-                    'h-[6px] rounded-full border-0 p-0 transition-all duration-300',
-                    i === current
-                      ? 'w-6 bg-white'
-                      : 'w-[6px] bg-white/40 hover:bg-white/60',
-                  ].join(' ')}
-                />
-              ))}
-            </div>
+            <>
+              <button
+                type="button"
+                onClick={prev}
+                aria-label={`Previous ${name} photo`}
+                className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#131618]/55 text-[#f3f4f1] transition-colors hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+              >
+                <ChevronLeftIcon className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label={`Next ${name} photo`}
+                className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#131618]/55 text-[#f3f4f1] transition-colors hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+              >
+                <ChevronRightIcon className="h-5 w-5" />
+              </button>
+              <div
+                className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-[6px]"
+                role="tablist"
+                aria-label="Image indicators"
+              >
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === current}
+                    aria-label={`View image ${i + 1}`}
+                    onClick={() => goTo(i)}
+                    className={[
+                      'h-[6px] rounded-full border-0 p-0 transition-all duration-300',
+                      i === current
+                        ? 'w-6 bg-white'
+                        : 'w-[6px] bg-white/40 hover:bg-white/60',
+                    ].join(' ')}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </div>
 
@@ -204,7 +160,13 @@ export default function VehicleCard({
                 color: '#f3f4f1',
               }}
             >
-              {name}
+              {detailHref ? (
+                <Link href={detailHref} className="hover:underline">
+                  {name}
+                </Link>
+              ) : (
+                name
+              )}
             </p>
             <p
               className="w-full shrink-0"
@@ -221,9 +183,9 @@ export default function VehicleCard({
             </p>
           </div>
 
-          {/* Specs row */}
+          {/* Specs row — wraps instead of overflowing when labels run long */}
           <div
-            className="flex items-center justify-between w-full px-4 py-3 border-b"
+            className="flex flex-wrap items-center gap-x-2 gap-y-2 w-full px-4 py-3 border-b sm:flex-nowrap sm:justify-between sm:gap-x-0"
             style={{
               background: '#131618',
               borderColor: '#515c65',
@@ -233,10 +195,10 @@ export default function VehicleCard({
           >
             {/* Seats */}
             <div
-              className="flex items-center gap-1 px-3 py-1 rounded-full shrink-0"
-              style={{ background: '#24282b' }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full shrink-0 sm:px-3"
+              style={{ background: '#24282b', color: '#eff0eb' }}
             >
-              <SeatIcon />
+              <SeatIcon className={CHIP_ICON} />
               <span
                 className="whitespace-nowrap"
                 style={{
@@ -245,16 +207,15 @@ export default function VehicleCard({
                   fontSize: 12,
                   lineHeight: '16px',
                   letterSpacing: '-0.36px',
-                  color: '#eff0eb',
                 }}
               >
                 Seats:{seats}
               </span>
             </div>
 
-            {/* Divider */}
+            {/* Divider — decorative, dropped once the row can wrap */}
             <div
-              className="shrink-0"
+              className="hidden shrink-0 sm:block"
               style={{
                 width: 0.5,
                 height: 28,
@@ -265,10 +226,10 @@ export default function VehicleCard({
 
             {/* Luggage */}
             <div
-              className="flex items-center gap-1 px-3 py-1 rounded-full shrink-0"
-              style={{ background: '#24282b' }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full shrink-0 sm:px-3"
+              style={{ background: '#24282b', color: '#eff0eb' }}
             >
-              <LuggageIcon />
+              <LuggageIcon className={CHIP_ICON} />
               <span
                 className="whitespace-nowrap"
                 style={{
@@ -277,7 +238,6 @@ export default function VehicleCard({
                   fontSize: 12,
                   lineHeight: '16px',
                   letterSpacing: '-0.36px',
-                  color: '#eff0eb',
                 }}
               >
                 Luggage:{luggage}
@@ -286,7 +246,7 @@ export default function VehicleCard({
 
             {/* Divider */}
             <div
-              className="shrink-0"
+              className="hidden shrink-0 sm:block"
               style={{
                 width: 0.5,
                 height: 28,
@@ -297,10 +257,10 @@ export default function VehicleCard({
 
             {/* Year */}
             <div
-              className="flex items-center gap-1 px-3 py-1 rounded-full shrink-0"
-              style={{ background: '#24282b' }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full shrink-0 sm:px-3"
+              style={{ background: '#24282b', color: '#eff0eb' }}
             >
-              <CarIcon />
+              <CarIcon className={CHIP_ICON} />
               <span
                 className="whitespace-nowrap"
                 style={{
@@ -309,7 +269,6 @@ export default function VehicleCard({
                   fontSize: 12,
                   lineHeight: '16px',
                   letterSpacing: '-0.36px',
-                  color: '#eff0eb',
                 }}
               >
                 {year}
@@ -317,49 +276,51 @@ export default function VehicleCard({
             </div>
           </div>
 
-          {/* Price + Reserve button */}
+          {/* Details + Reserve button */}
           <div
-            className="flex items-center justify-between w-full p-4 rounded-bl-[14px] rounded-br-[14px]"
+            className="flex flex-wrap items-center justify-between gap-3 w-full p-4 rounded-bl-[14px] rounded-br-[14px]"
             style={{ background: '#131618' }}
           >
-            <p
-              className="whitespace-nowrap shrink-0"
+            <Link
+              href={detailHref}
+              className="whitespace-nowrap shrink-0 underline underline-offset-4 transition-opacity hover:opacity-80"
               style={{
-                fontFamily: "'Geist', sans-serif",
+                fontFamily: "'Geist Mono', monospace",
                 fontWeight: 500,
-                fontSize: 20,
-                lineHeight: '24px',
-                letterSpacing: '-0.6px',
+                fontSize: 16,
+                lineHeight: '20px',
+                letterSpacing: '-0.48px',
+                textTransform: 'uppercase',
                 color: '#eff0eb',
               }}
             >
-              ${pricePerHour}/h
-            </p>
+              Details
+            </Link>
 
             <Link
               href={reserveHref}
-              className="flex items-center gap-1 rounded-full shrink-0 transition-opacity hover:opacity-90"
+              className="flex items-center justify-between gap-1 rounded-full flex-1 min-w-[152px] max-w-[180px] transition-opacity hover:opacity-90"
               style={{
                 background: '#eff0eb',
                 paddingLeft: 16,
                 paddingRight: 4,
                 paddingTop: 4,
                 paddingBottom: 4,
-                width: 162,
               }}
             >
               <span
-                className="flex-1 min-w-0 uppercase"
+                className="whitespace-nowrap"
                 style={{
                   fontFamily: "'Geist Mono', monospace",
                   fontWeight: 500,
                   fontSize: 16,
                   lineHeight: '20px',
                   letterSpacing: '-0.48px',
+                  textTransform: 'uppercase',
                   color: '#191a19',
                 }}
               >
-                Reserve now
+                Get a quote
               </span>
               <span
                 className="flex items-center justify-center rounded-full shrink-0"
@@ -367,10 +328,11 @@ export default function VehicleCard({
                   background: '#2e2e2d',
                   width: 24,
                   height: 24,
+                  color: '#eff0eb',
                 }}
                 aria-hidden="true"
               >
-                <ArrowOutwardIcon />
+                <ArrowOutwardIcon className="w-4 h-4" />
               </span>
             </Link>
           </div>

@@ -4,26 +4,17 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { SERVICES } from '@/lib/services';
+
 // Social icon assets
 const SOCIAL = {
-  phone:     'https://www.figma.com/api/mcp/asset/289bb38b-1229-4b28-971f-5f236962c5fc',
-  email:     'https://www.figma.com/api/mcp/asset/51970052-ed97-4c1f-809a-af63d044606a',
-  facebook:  'https://www.figma.com/api/mcp/asset/f5201174-d169-4003-9321-56eb4cceb79a',
-  instagram: 'https://www.figma.com/api/mcp/asset/38d450ed-fd69-40d2-8706-3c798d0ef9ec',
-  x:         'https://www.figma.com/api/mcp/asset/45e34814-f21f-4469-aaf8-35d53e9a5833',
+  phone: 'https://www.figma.com/api/mcp/asset/289bb38b-1229-4b28-971f-5f236962c5fc',
+  email: 'https://www.figma.com/api/mcp/asset/51970052-ed97-4c1f-809a-af63d044606a',
 };
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const SERVICES_SUBMENU = [
-  { label: 'Airport Transfers',   href: '/services/airport-transfers' },
-  { label: 'Corporate Travel',    href: '/services/corporate-travel' },
-  { label: 'Sports & Live Events',href: '/services/sports-live-events' },
-  { label: 'Wedding Limo',        href: '/services/wedding-limo' },
-  { label: 'Boston to New York',  href: '/services/boston-new-york' },
-  { label: 'Seaport Transfer',    href: '/services/seaport-transfer' },
-  { label: 'Night Out Limo',      href: '/services/night-out-limo' },
-];
+const SERVICES_SUBMENU = SERVICES.map(({ navLabel, href }) => ({ label: navLabel, href }));
 
 const NAV_LINKS = [
   { label: 'About Us',  href: '/about' },
@@ -61,12 +52,12 @@ function ReserveButton({ className = '' }: { className?: string }) {
       className={`
         inline-flex items-center gap-1.5 px-5 py-3 rounded-full
         bg-[#1c60ff] text-[#0c0d0f]
-        font-['Geist_Mono',monospace] font-medium text-[16px] leading-5 tracking-[-0.03em] uppercase
-        transition-opacity hover:opacity-90 whitespace-nowrap
+        font-['Geist_Mono',monospace] font-medium text-[16px] leading-5 tracking-[-0.03em]
+        uppercase transition-opacity hover:opacity-90 whitespace-nowrap
         ${className}
       `}
     >
-      RESERVE NOW
+      Get a quote
       {/* Arrow outward icon */}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M9 5H19M19 5V15M19 5L5 19" stroke="#0c0d0f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -256,23 +247,11 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         <div className="flex items-end justify-between px-5 py-8">
           {/* Contact icons */}
           <div className="flex gap-4 items-center">
-            <a href="tel:+1" aria-label="Call us" className="opacity-70 hover:opacity-100 transition-opacity">
-              <img src={SOCIAL.phone} alt="Phone" width={20} height={20} />
+            <a href="tel:+18579304661" aria-label="Call (857) 930-4661" className="opacity-70 hover:opacity-100 transition-opacity">
+              <img src={SOCIAL.phone} alt="" width={20} height={20} />
             </a>
-            <a href="mailto:info@bostonexclusive.com" aria-label="Email us" className="opacity-70 hover:opacity-100 transition-opacity">
-              <img src={SOCIAL.email} alt="Email" width={20} height={20} />
-            </a>
-          </div>
-          {/* Social icons */}
-          <div className="flex gap-4 items-center">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="opacity-70 hover:opacity-100 transition-opacity">
-              <img src={SOCIAL.facebook} alt="Facebook" width={20} height={20} />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="opacity-70 hover:opacity-100 transition-opacity">
-              <img src={SOCIAL.instagram} alt="Instagram" width={20} height={20} />
-            </a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="opacity-70 hover:opacity-100 transition-opacity">
-              <img src={SOCIAL.x} alt="X" width={20} height={20} />
+            <a href="mailto:support@bostonexclusive.com" aria-label="Email support" className="opacity-70 hover:opacity-100 transition-opacity">
+              <img src={SOCIAL.email} alt="" width={20} height={20} />
             </a>
           </div>
         </div>

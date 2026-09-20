@@ -1,3 +1,8 @@
+'use client';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import { ChevronLeftIcon, ChevronRightIcon } from './FleetIcons';
 import VehicleCard, { VehicleCardProps } from './VehicleCard';
 
 const FLEET: VehicleCardProps[] = [
@@ -7,13 +12,14 @@ const FLEET: VehicleCardProps[] = [
     seats: 4,
     luggage: 4,
     year: 2025,
-    pricePerHour: 112,
     images: [
-      { src: '/Images/S-Class 2.png', alt: 'Mercedes-Benz S-Class side' },
-      { src: '/vehicles/s-class-1.jpg', alt: 'Mercedes-Benz S-Class front' },
-      { src: '/vehicles/s-class-2.jpg', alt: 'Mercedes-Benz S-Class interior' },
+      { src: '/Images/Mercedes-Benz-S-Clas-Exterior.jpg', alt: 'Mercedes-Benz S-Class front three-quarter' },
+      { src: '/Images/S-Class-Frist set.png', alt: 'Mercedes-Benz S-Class front seats' },
+      { src: '/Images/S-Class interior.png', alt: 'Mercedes-Benz S-Class rear bench' },
+      { src: '/Images/S-Class-Back-Interior.png', alt: 'Mercedes-Benz S-Class rear cabin' },
     ],
     reserveHref: '/reserve/s-class',
+    detailHref: '/fleet/mercedes-benz-s-class',
   },
   {
     name: 'Cadillac Escalade',
@@ -21,16 +27,16 @@ const FLEET: VehicleCardProps[] = [
     seats: 7,
     luggage: 6,
     year: 2025,
-    pricePerHour: 135,
     images: [
+      { src: '/Images/Cadillac-Escalade-Exterior.jpg', alt: 'Cadillac Escalade front three-quarter' },
       { src: '/Images/Escalade Frontal.png', alt: 'Cadillac Escalade front' },
-      { src: '/Images/Escalade Frontal.jpg', alt: 'Cadillac Escalade front view' },
-      { src: '/Images/Escalade Back Side.png', alt: 'Cadillac Escalade back side' },
-      { src: '/Images/Escalade-Interior 1.png', alt: 'Cadillac Escalade interior' },
-      { src: '/Images/Escalade-Interior 2.png', alt: 'Cadillac Escalade interior detail' },
-      { src: '/Images/Escalade-Trunk.jpg', alt: 'Cadillac Escalade trunk' },
+      { src: '/Images/Escalade Back Side.png', alt: 'Cadillac Escalade rear three-quarter' },
+      { src: '/Images/Cadillac-Escalade-Interior.jpg', alt: 'Cadillac Escalade cabin' },
+      { src: '/Images/Cadillac-Escalade-Interior-Back.jpg', alt: 'Cadillac Escalade second-row seats' },
+      { src: '/Images/Escalade-Trunk.jpg', alt: 'Cadillac Escalade cargo area' },
     ],
     reserveHref: '/reserve/escalade',
+    detailHref: '/fleet/cadillac-escalade',
   },
   {
     name: 'Chevrolet Suburban',
@@ -38,24 +44,14 @@ const FLEET: VehicleCardProps[] = [
     seats: 4,
     luggage: 3,
     year: 2025,
-    pricePerHour: 105,
     images: [
-      { src: '/Images/Chevy_.png', alt: 'Chevrolet Suburban front' },
+      { src: '/Images/Chevrolet-Suburban-Frontal.jpg', alt: 'Chevrolet Suburban front three-quarter' },
+      { src: "/Images/Chevrolet-Suburban-Interior-Fron't Seat.png", alt: 'Chevrolet Suburban front seats' },
+      { src: '/Images/Chevrolet-Suburban-Interior.png', alt: 'Chevrolet Suburban cabin' },
+      { src: '/Images/Chevrolet-Suburban-Interior-Middle- Seat.png', alt: 'Chevrolet Suburban second-row seats' },
     ],
     reserveHref: '/reserve/chevrolet-suburban',
-  },
-  {
-    name: 'Lincoln Navigator',
-    category: 'Full-Size SUV',
-    seats: 7,
-    luggage: 6,
-    year: 2024,
-    pricePerHour: 128,
-    images: [
-      { src: '/vehicles/navigator-1.jpg', alt: 'Lincoln Navigator front' },
-      { src: '/vehicles/navigator-2.jpg', alt: 'Lincoln Navigator interior' },
-    ],
-    reserveHref: '/reserve/navigator',
+    detailHref: '/fleet/chevrolet-suburban',
   },
   {
     name: 'Mercedes-Benz Sprinter',
@@ -63,29 +59,59 @@ const FLEET: VehicleCardProps[] = [
     seats: 12,
     luggage: 10,
     year: 2025,
-    pricePerHour: 180,
     images: [
-      { src: '/vehicles/sprinter-1.jpg', alt: 'Mercedes-Benz Sprinter front' },
-      { src: '/vehicles/sprinter-2.jpg', alt: 'Mercedes-Benz Sprinter interior' },
+      { src: '/Images/Mercedes-Benz-Sprinter.jpg', alt: 'Mercedes-Benz Sprinter front three-quarter' },
     ],
     reserveHref: '/reserve/sprinter',
-  },
-  {
-    name: 'Rolls-Royce Ghost',
-    category: 'Ultra Luxury Sedan',
-    seats: 4,
-    luggage: 3,
-    year: 2025,
-    pricePerHour: 350,
-    images: [
-      { src: '/vehicles/ghost-1.jpg', alt: 'Rolls-Royce Ghost front' },
-      { src: '/vehicles/ghost-2.jpg', alt: 'Rolls-Royce Ghost interior' },
-    ],
-    reserveHref: '/reserve/rolls-royce-ghost',
+    detailHref: '/fleet/mercedes-benz-sprinter',
   },
 ];
 
 export default function FleetSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const cardsInScroller = () =>
+    Array.from(scrollerRef.current?.querySelectorAll<HTMLElement>('[data-fleet-card]') ?? []);
+
+  const syncActive = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const cards = cardsInScroller();
+    if (cards.length === 0) return;
+    const mid = el.scrollLeft + el.clientWidth / 2;
+    let nearest = 0;
+    let nearestDist = Number.POSITIVE_INFINITY;
+    cards.forEach((card, index) => {
+      const center = card.offsetLeft + card.offsetWidth / 2;
+      const dist = Math.abs(center - mid);
+      if (dist < nearestDist) {
+        nearest = index;
+        nearestDist = dist;
+      }
+    });
+    setActive(nearest);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    syncActive();
+    el.addEventListener('scroll', syncActive, { passive: true });
+    window.addEventListener('resize', syncActive);
+    return () => {
+      el.removeEventListener('scroll', syncActive);
+      window.removeEventListener('resize', syncActive);
+    };
+  }, [syncActive]);
+
+  const scrollToCard = (index: number) => {
+    const cards = cardsInScroller();
+    const next = (index + cards.length) % cards.length;
+    cards[next]?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    setActive(next);
+  };
+
   return (
     <section
       className="w-full py-16 px-4 sm:px-8"
@@ -104,9 +130,9 @@ export default function FleetSection() {
             flexShrink: 0,
           }}
         >
-          Check
+          Choose your
           <br />
-          Our Fleet
+          vehicle
         </h2>
         <p
           className="md:max-w-[589px]"
@@ -119,21 +145,40 @@ export default function FleetSection() {
             color: '#595a59',
           }}
         >
-          We provide a wide range of luxurious vehicles, ranging in capacity
-          from 1 to 55 passengers, including sedans, SUVs, Vans, Stretch
-          Limousine Service, and Motor Coaches, each one a late-model vehicle in
-          excellent condition.
+          From a Mercedes S-Class for two to motor coaches for fifty-five —
+          every vehicle is late-model, detailed, and driven by one of our own
+          chauffeurs. Airport transfers are flat-rate.
         </p>
       </div>
 
       {/* Cards — always horizontal scroll */}
       <div
+        ref={scrollerRef}
         className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4"
         style={{ scrollbarWidth: 'none' }}
       >
         {FLEET.map((vehicle) => (
           <VehicleCard key={vehicle.name} {...vehicle} />
         ))}
+      </div>
+
+      <div className="mx-auto mt-2 flex max-w-[1352px] items-center justify-center gap-3 px-4">
+        <button
+          type="button"
+          onClick={() => scrollToCard(active - 1)}
+          aria-label="Previous vehicle"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#515c65] bg-[#131618] text-[#eff0eb] transition-opacity hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+        >
+          <ChevronLeftIcon className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollToCard(active + 1)}
+          aria-label="Next vehicle"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#515c65] bg-[#131618] text-[#eff0eb] transition-opacity hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+        >
+          <ChevronRightIcon className="h-5 w-5" />
+        </button>
       </div>
     </section>
   );

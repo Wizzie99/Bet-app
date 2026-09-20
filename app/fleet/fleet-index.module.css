@@ -1,0 +1,432 @@
+/* Fleet index. Shares the token block and type scale with
+   app/fleet/[slug]/vehicle-detail.module.css so the two read as one flow. */
+
+.page {
+  --surface-background: #eff0eb;
+  --surface-foreground: #131618;
+  --grey-500: #131618;
+  --grey-400: #24282b;
+  --border-default: #515c65;
+  --border-default-light: #898987;
+  --border-lighter: #bbbcb8;
+  --white-400: #f3f4f1;
+  --white-500: #eff0eb;
+  --white-600: #bbbcb8;
+  --white-950: #191a19;
+  --text-title: #2e2e2d;
+  --text-body: #595a59;
+  --border-selected: #1c60ff;
+
+  --font-display: "Lastik", "Instrument Serif", Georgia, serif;
+
+  background: var(--surface-background);
+  color: var(--text-title);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+@font-face {
+  font-family: "Lastik";
+  src: url("/fonts/Lastik-Free.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.page :focus-visible {
+  outline: 2px solid var(--border-selected);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ══ Breadcrumb ══ */
+.breadcrumb {
+  width: 100%;
+  max-width: 1440px;
+  padding: 26px 40px 0;
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  color: var(--text-body);
+}
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--text-title);
+}
+.breadcrumbCurrent {
+  color: var(--text-title);
+}
+
+/* ══ Shell ══ */
+.shell {
+  width: 100%;
+  max-width: 1440px;
+  padding: 40px 40px 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+/* ══ Masthead ══ */
+.masthead {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+}
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.36px;
+  color: var(--text-body);
+  white-space: pre;
+}
+.h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.1;
+  letter-spacing: -1.28px;
+  color: var(--text-title);
+}
+.lede {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -0.6px;
+  color: var(--text-body);
+  max-width: 789px;
+}
+
+/* ══ Card grid ══ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background: var(--grey-500);
+  border-radius: 20px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(19, 22, 24, 0.18);
+}
+
+/* Media well — placeholder until /public/fleet/* photography lands */
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 282 / 200;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+}
+.ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(187, 188, 184, 0.14) 0 1px,
+      transparent 1px 14px
+    ),
+    var(--grey-400);
+}
+.phLabel {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white-600);
+}
+.mediaTag {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: var(--white-500);
+  color: var(--white-950);
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: -0.33px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Card body */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 0 auto;
+  padding: 16px;
+}
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid var(--border-default);
+}
+.cardName {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+  color: var(--white-400);
+}
+.cardClass {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.36px;
+  color: var(--white-600);
+}
+
+.specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.chip {
+  background: var(--grey-400);
+  border-radius: 999px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: -0.33px;
+  color: var(--white-500);
+  white-space: nowrap;
+}
+.chip svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--white-500);
+}
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-default);
+  flex-shrink: 0;
+}
+
+.cardBlurb {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: -0.39px;
+  color: var(--white-600);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFoot {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 0.5px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.rate {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.48px;
+  color: var(--white-500);
+}
+.rateNote {
+  font-size: 11px;
+  letter-spacing: -0.33px;
+  color: var(--white-600);
+}
+.viewLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--white-500);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
+  color: var(--white-950);
+  white-space: nowrap;
+}
+.viewLink svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* ══ Closing CTA ══ */
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 28px 32px;
+  border-radius: 20px;
+  background: var(--grey-500);
+}
+.ctaCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 640px;
+}
+.ctaTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: var(--white-400);
+}
+.ctaBody {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.45px;
+  color: var(--white-600);
+}
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.ctaPrimary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--border-selected);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.45px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+.ctaPrimary:hover {
+  opacity: 0.9;
+}
+.ctaPrimary svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.ctaTel {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.45px;
+  color: var(--white-500);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ctaTel:hover {
+  text-decoration: underline;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .h1 {
+    font-size: 52px;
+    letter-spacing: -1.04px;
+  }
+}
+
+@media (max-width: 760px) {
+  .breadcrumb {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .shell {
+    gap: 44px;
+    padding: 28px 20px 88px;
+  }
+  .h1 {
+    font-size: 40px;
+    letter-spacing: -0.8px;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cta {
+    padding: 24px 20px;
+  }
+  .ctaTitle {
+    font-size: 26px;
+    letter-spacing: -0.52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page * {
+    transition: none !important;
+  }
+  .card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,397 @@
+/* Fanned services deck from Figma node 1123:6860. */
+
+.section {
+  --surface-background: #eff0eb;
+  --card-bg: #131618;
+  --card-line: #45484b;
+  --scrim-to: #14171a;
+  --white-500: #eff0eb;
+  --card-body: #c5c5c5;
+  --text-title: #2e2e2d;
+  --text-body: #595a59;
+  --line-light: rgba(25, 26, 25, 0.14);
+  --card-w: 335px;
+  --deck-body: 13px;
+  --font-display: "Lastik", "Instrument Serif", Georgia, serif;
+
+  width: 100%;
+  padding: 112px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  background: var(--surface-background);
+}
+
+@font-face {
+  font-family: "Lastik";
+  src: url("/fonts/Lastik-Free.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.head {
+  width: 100%;
+  max-width: 1352px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.36px;
+  color: var(--text-body);
+}
+
+.h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.96px;
+  color: var(--text-title);
+}
+
+.lede {
+  max-width: 640px;
+  margin: 0;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: -0.6px;
+  color: var(--text-body);
+}
+
+/* ══ Deck ══ */
+.deckWrap {
+  width: 100%;
+  max-width: 1352px;
+  margin: 0 auto;
+  /* Generous vertical padding so the rotated cards aren't clipped by the
+     overflow-y hidden that overflow-x auto forces on this scroller. */
+  padding: 28px 0 32px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.deckWrap::-webkit-scrollbar {
+  display: none;
+}
+
+.deck {
+  position: relative;
+  min-width: calc(var(--card-w) * 2.5343 + 24px);
+  height: calc(var(--card-w) * 1.56);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slot {
+  position: absolute;
+  top: calc(var(--card-w) * var(--y));
+  left: calc(var(--card-w) * var(--x));
+  width: var(--card-w);
+  transform: rotate(var(--rot));
+  transform-origin: 50% 50%;
+  transition:
+    left 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    top 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ══ Card ══ */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  overflow: hidden;
+  border: 0.3px solid var(--card-line);
+  border-radius: 16px;
+  background: var(--card-bg);
+}
+
+.imageWrap {
+  padding: 2px;
+  border-radius: 16px 16px 0 0;
+  background: var(--card-bg);
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 16px,
+      rgba(239, 240, 235, 0.035) 16px 17px
+    ),
+    linear-gradient(180deg, #3a4148 0%, #1c2125 100%);
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.phLabel {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: -0.33px;
+  color: rgba(239, 240, 235, 0.55);
+}
+
+.imageScrim {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 72px;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    var(--scrim-to) 7.547%,
+    rgba(20, 23, 26, 0.698) 26.94%,
+    rgba(20, 23, 26, 0.443) 44.841%,
+    rgba(20, 23, 26, 0) 73.76%
+  );
+}
+
+.text {
+  min-height: 86px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  color: var(--white-500);
+}
+
+.cardBody {
+  max-width: 315px;
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 300;
+  font-size: var(--deck-body);
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  color: var(--card-body);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.action {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 0.3px solid var(--card-line);
+  border-radius: 0 0 14px 14px;
+}
+
+.learn {
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.1;
+  letter-spacing: -0.48px;
+  color: var(--white-500);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-shrink: 0;
+  color: var(--white-500);
+}
+
+.arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ══ Scrim and click target on cards behind the front one ══ */
+.bring {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.53);
+  transition: background 0.24s ease;
+}
+
+.bring:hover {
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.bring:focus-visible {
+  outline: 2px solid var(--text-title);
+  outline-offset: 3px;
+}
+
+/* ══ Footer controls ══ */
+.foot {
+  width: 100%;
+  max-width: 1352px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot,
+.dotActive {
+  width: 28px;
+  height: 4px;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  border-radius: 999px;
+  background: var(--line-light);
+  transition: background 0.2s ease;
+}
+
+.dot:hover {
+  background: rgba(25, 26, 25, 0.3);
+}
+
+.dotActive {
+  background: var(--card-bg);
+}
+
+.allLink {
+  margin-left: auto;
+  font-size: 14px;
+  letter-spacing: -0.42px;
+  color: var(--text-title);
+  text-decoration: none;
+}
+
+.allLink:hover {
+  text-decoration: underline;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 1240px) {
+  .section {
+    --card-w: 300px;
+    padding: 88px 28px;
+  }
+}
+
+@media (max-width: 860px) {
+  .section {
+    padding: 64px 0 64px 20px;
+    gap: 28px;
+  }
+
+  .head {
+    padding-right: 20px;
+  }
+
+  .h2 {
+    font-size: 34px;
+    letter-spacing: -0.68px;
+  }
+
+  .lede {
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  /* The fan becomes a horizontal snap row on narrow screens. */
+  .deckWrap {
+    padding: 0 20px 16px 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .deck {
+    position: static;
+    min-width: 0;
+    height: auto;
+    display: flex;
+    gap: 14px;
+  }
+
+  .slot {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(280px, calc(100vw - 60px));
+    flex-shrink: 0;
+    z-index: auto !important;
+    transform: none;
+    transition: none;
+    scroll-snap-align: start;
+  }
+
+  .bring {
+    display: none;
+  }
+
+  .foot {
+    padding-right: 20px;
+  }
+
+  .dots {
+    display: none;
+  }
+
+  .allLink {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot,
+  .bring {
+    transition: none !important;
+  }
+}

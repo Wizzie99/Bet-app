@@ -3,20 +3,20 @@ import Image from 'next/image';
 export default function FeaturesGrid() {
   return (
     <section className="w-full bg-white py-16 px-4 sm:px-8">
-      <div className="max-w-[1352px] mx-auto flex flex-col lg:flex-row gap-2 w-full">
+      <div className="max-w-[1352px] mx-auto flex flex-col lg:flex-row lg:items-stretch gap-2 w-full">
 
         {/* ── Column 1 ─────────────────────────────────────────────── */}
         <div className="flex flex-col gap-2 flex-1 min-w-0">
 
-          {/* Always On Time — with map image */}
+          {/* On time, every time — with map image */}
           <div
-            className="flex flex-col overflow-hidden rounded-2xl"
+            className="flex flex-1 flex-col overflow-hidden rounded-2xl min-h-0"
             style={{ background: '#131618', border: '0.1px solid #1d2019' }}
           >
             {/* Text header */}
             <div className="flex gap-6 items-end p-4">
               <div className="flex flex-col gap-2 flex-1 min-w-0">
-                <Image src="/features/icon-route.png" alt="" width={40} height={40} />
+                <Image src="/Icons/On time every time.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -27,11 +27,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Always<br />On Time
+                  On time,<br />every time
                 </p>
               </div>
               <p
-                className="shrink-0 w-[205px]"
+                className="min-w-0 flex-1"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 300,
@@ -41,15 +41,15 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                We use the latest technology to ensure no surprise occures. Routes are always pre-calculated and we get notified.
+                Every route is planned before your chauffeur leaves the garage, with live traffic feeding your pickup time. If anything changes, you get a text — not a surprise.
               </p>
             </div>
 
-            {/* Map image */}
-            <div className="relative w-full" style={{ aspectRatio: '335 / 263' }}>
+            {/* Route tracking image */}
+            <div className="relative w-full flex-1 min-h-[220px]">
               <Image
-                src="/features/map-bg.png"
-                alt="Route map"
+                src="/Images/Features.jpg"
+                alt="Live route tracking"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
@@ -57,14 +57,14 @@ export default function FeaturesGrid() {
             </div>
           </div>
 
-          {/* Your Data Stays Your's */}
+          {/* Pay securely — Stripe */}
           <div
-            className="flex items-center gap-1 p-4 rounded-2xl"
+            className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
             style={{ background: '#131618', border: '0.1px solid #1d2019' }}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <Image src="/features/icon-encrypted.png" alt="" width={24} height={24} />
+                <Image src="/Icons/Pay secureley.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -75,11 +75,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Your Data<br />Stays Your&apos;s
+                  Pay securely,<br />tip nothing extra
                 </p>
               </div>
               <p
-                className="w-[194px]"
+                className="min-w-0"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 300,
@@ -89,11 +89,8 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                BET strictly follows all health and safety protocols. We clean each of our vehicles before and after each trip.
+                Payments run through Stripe; we never store your card. Every quote already includes taxes, tolls, and a 20% chauffeur gratuity. The price you see is the price you pay.
               </p>
-            </div>
-            <div className="relative shrink-0" style={{ width: 76, height: 36 }}>
-              <Image src="/features/stripe-logo.png" alt="Stripe" fill className="object-contain" />
             </div>
           </div>
         </div>
@@ -101,14 +98,14 @@ export default function FeaturesGrid() {
         {/* ── Column 2 ─────────────────────────────────────────────── */}
         <div className="flex flex-col gap-2 flex-1 min-w-0">
 
-          {/* Veted Chauffeurs */}
+          {/* Vetted chauffeurs */}
           <div
-            className="flex items-center gap-1 p-4 rounded-2xl"
+            className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
             style={{ background: '#131618', border: '0.1px solid #1d2019' }}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <Image src="/features/icon-fingerprint.png" alt="" width={24} height={24} />
+                <Image src="/Icons/Vetted_Chauffeurs.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -119,11 +116,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Veted<br />Chauffeurs
+                  Vetted<br />chauffeurs
                 </p>
               </div>
               <p
-                className="w-[194px]"
+                className="min-w-0"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 300,
@@ -133,7 +130,7 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                Our chauffeurs are carefully screened, fluent in English, and highly skilled. The average is 5+ years of professional experience.
+                Background-checked, licensed, and insured, with an average of five years behind the wheel professionally. You&apos;ll get your chauffeur&apos;s name, photo, and number the night before.
               </p>
             </div>
 
@@ -161,16 +158,15 @@ export default function FeaturesGrid() {
 
           {/* Sign Up — blue promo card */}
           <div
-            className="flex-1 flex p-4 rounded-2xl"
+            className="flex-1 flex p-4 rounded-2xl min-h-[360px] lg:min-h-0"
             style={{
               background: '#1c60ff',
               border: '0.1px solid #1d2019',
-              minHeight: 400,
             }}
           >
             <div className="flex flex-col gap-6 justify-end">
               <div className="flex flex-col gap-[58px]">
-                <Image src="/features/icon-howtoreg.png" alt="" width={40} height={40} />
+                <Image src="/Icons/Creane an Acc.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -181,11 +177,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Sign Up to<br />Get a 20% Off
+                  20% off your<br />first ride
                 </p>
               </div>
               <p
-                className="w-[156px]"
+                className="max-w-[220px]"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 300,
@@ -195,7 +191,7 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                BET strictly follows all health and safety protocols. We clean each of our vehicles before and after each trip. Our cleaning procedure includes the use of sanitizer for disinfection.
+                Create a free account and the discount is applied automatically at checkout. No code to remember.
               </p>
             </div>
           </div>
@@ -206,17 +202,16 @@ export default function FeaturesGrid() {
 
           {/* Flight tracking card */}
           <div
-            className="relative overflow-hidden rounded-2xl"
+            className="relative overflow-hidden rounded-2xl flex-1 min-h-[520px]"
             style={{
               background: '#131618',
               border: '0.2px solid #8c8c8c',
-              height: 400,
             }}
           >
             {/* Top text */}
             <div className="absolute top-0 left-0 right-0 z-10 flex gap-6 items-end p-4">
               <div className="flex flex-col gap-2 flex-1 min-w-0">
-                <Image src="/features/icon-route.png" alt="" width={24} height={24} />
+                <Image src="/Icons/Flight_Land.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -227,11 +222,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Always<br />On Time
+                  Where&apos;s my plane?<br />We know.
                 </p>
               </div>
               <p
-                className="shrink-0 w-[210px]"
+                className="min-w-0 flex-1"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 400,
@@ -241,7 +236,7 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                We use the latest technology to ensure no surprise occures. Routes are always pre-calculated and we get notified.
+                Add your flight number and we track it from wheels-up. Land early and we&apos;re already curbside. Delayed 45 minutes? Your pickup moves 45 minutes, free.
               </p>
             </div>
 
@@ -335,12 +330,12 @@ export default function FeaturesGrid() {
 
           {/* Clean & Sanitized Vehicles */}
           <div
-            className="flex items-center gap-1 p-4 rounded-2xl"
+            className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
             style={{ background: '#131618', border: '0.1px solid #1d2019' }}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <Image src="/features/icon-cleaning.png" alt="" width={24} height={24} />
+                <Image src="/Icons/Clean.svg" alt="" width={40} height={40} unoptimized />
                 <p
                   style={{
                     fontFamily: "'Geist', sans-serif",
@@ -351,11 +346,11 @@ export default function FeaturesGrid() {
                     color: '#ffffff',
                   }}
                 >
-                  Clean &amp; Sanitized<br />Vehicles
+                  Detailed between<br />every trip
                 </p>
               </div>
               <p
-                className="w-[194px]"
+                className="min-w-0"
                 style={{
                   fontFamily: "'Geist', sans-serif",
                   fontWeight: 300,
@@ -365,7 +360,7 @@ export default function FeaturesGrid() {
                   color: '#d9d9d9',
                 }}
               >
-                BET strictly follows all health and safety protocols. We clean each of our vehicles before and after each trip.
+                Interiors are cleaned and restocked after each ride — water, chargers, and a cabin that smells like a new car, because most of ours nearly are.
               </p>
             </div>
           </div>

@@ -24,3 +24,48 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── Smooth anchor scrolling ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Scroll-reveal animation ─────────────────────────────────────────────── */
+/* Applied by the <Reveal> component. Elements start slightly offset and
+   transparent, then transition into place when they enter the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-offset, 24px));
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-direction="down"] {
+  transform: translateY(calc(var(--reveal-offset, 24px) * -1));
+}
+.reveal[data-direction="left"] {
+  transform: translateX(var(--reveal-offset, 24px));
+}
+.reveal[data-direction="right"] {
+  transform: translateX(calc(var(--reveal-offset, 24px) * -1));
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Respect users who prefer reduced motion: no transforms, no smooth scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

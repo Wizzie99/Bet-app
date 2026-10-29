@@ -5,6 +5,7 @@ import StatsSection from '@/components/StatsSection';
 import FleetSection from '@/components/FleetSection';
 import ContactForm from '@/components/ContactForm';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import Reveal from '@/components/Reveal';
 
 export const metadata: Metadata = {
   title: 'Boston Car Service & Logan Airport Transfers | BET',
@@ -16,11 +17,21 @@ export default function Home() {
   return (
     <main className="flex-1 w-full min-h-0">
       <Hero />
-      <FeaturesGrid />
-      <StatsSection />
-      <FleetSection />
-      <ContactForm />
-      <TestimonialsSection />
+      <Reveal>
+        <FeaturesGrid />
+      </Reveal>
+      <Reveal>
+        <StatsSection />
+      </Reveal>
+      <Reveal>
+        <FleetSection />
+      </Reveal>
+      <Reveal>
+        <ContactForm />
+      </Reveal>
+      <Reveal>
+        <TestimonialsSection />
+      </Reveal>
     </main>
   );
 }

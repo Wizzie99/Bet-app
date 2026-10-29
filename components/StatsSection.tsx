@@ -57,7 +57,7 @@ export default function StatsSection() {
             <div className="flex items-center gap-4">
               {/* Outline button — Call */}
               <a
-                href="tel:+18579304661"
+                href="tel:+16172518384"
                 className="flex items-center gap-1.5 px-5 py-3 rounded-md transition-colors hover:bg-white/10"
               >
                 <span
@@ -71,7 +71,7 @@ export default function StatsSection() {
                     color: '#eff0eb',
                   }}
                 >
-                  Call (857) 930-4661
+                  Call (617) 251-8384
                 </span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M9 18l6-6-6-6" stroke="#eff0eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

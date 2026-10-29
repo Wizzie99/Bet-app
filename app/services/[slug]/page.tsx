@@ -24,7 +24,7 @@ import s from "./service-detail.module.css";
 const geist = Geist({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://YOUR-DOMAIN.com";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivelivery.com";
 
 /* ── Static generation ─────────────────────────────────────────── */
 

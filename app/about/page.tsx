@@ -3,10 +3,15 @@ import Link from 'next/link';
 
 import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/services';
 
+const title = 'About Boston Exclusive Transportation';
+const description =
+  'Six years and 50,000 rides across Greater Boston. Meet the team and the standards behind every trip.';
+
 export const metadata: Metadata = {
-  title: 'About Boston Exclusive Transportation',
-  description:
-    'Six years and 50,000 rides across Greater Boston. Meet the team and the standards behind every trip.',
+  title,
+  description,
+  alternates: { canonical: '/about' },
+  openGraph: { title, description, url: '/about', type: 'website' },
 };
 
 export default function AboutPage() {

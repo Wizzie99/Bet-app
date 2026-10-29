@@ -247,7 +247,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         <div className="flex items-end justify-between px-5 py-8">
           {/* Contact icons */}
           <div className="flex gap-4 items-center">
-            <a href="tel:+18579304661" aria-label="Call (857) 930-4661" className="opacity-70 hover:opacity-100 transition-opacity">
+            <a href="tel:+16172518384" aria-label="Call (617) 251-8384" className="opacity-70 hover:opacity-100 transition-opacity">
               <img src={SOCIAL.phone} alt="" width={20} height={20} />
             </a>
             <a href="mailto:support@bostonexclusive.com" aria-label="Email support" className="opacity-70 hover:opacity-100 transition-opacity">

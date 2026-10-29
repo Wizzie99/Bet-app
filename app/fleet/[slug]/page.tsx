@@ -4,7 +4,7 @@
 // Boston-Exclusive-WEB · node 1112:4314 ("Reserve / Escalade — Desktop")
 //
 // ── SETUP (still outstanding) ─────────────────────────────────────
-// 1. Photography: S-Class, Escalade, and Suburban use /public/Images.
+// 1. Photography: S-Class, Volvo S90, Escalade, and Suburban use /public/Images.
 //    Other vehicles still render labelled placeholder tiles.
 // 2. Fonts: Geist + Geist Mono load below. Lastik is a licensed face —
 //    drop Lastik-Free.woff2 into /public/fonts (see the module CSS).
@@ -38,7 +38,7 @@ import s from "./vehicle-detail.module.css";
 const geist = Geist({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://YOUR-DOMAIN.com";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivelivery.com";
 
 /* ── Static generation ─────────────────────────────────────────── */
 
@@ -56,15 +56,17 @@ export async function generateMetadata({
   if (!v) return {};
 
   const titles: Record<string, string> = {
-    "cadillac-escalade": "Cadillac Escalade with Chauffeur in Boston | BET",
-    "mercedes-benz-s-class": "Mercedes S-Class Chauffeur Service in Boston | BET",
+    "cadillac-escalade": "Cadillac Escalade with Chauffeur in Boston",
+    "mercedes-benz-s-class": "Mercedes S-Class Chauffeur Service in Boston",
+    "volvo-s90": "Volvo S90 Chauffeur Service in Boston",
   };
   const descriptions: Record<string, string> = {
     "cadillac-escalade": `Reserve a ${v.year} Escalade with a professional chauffeur. Seats ${v.seats} with ${v.luggage} bags. $${v.hourlyRate}/hr or flat-rate Logan transfers with flight tracking.`,
     "mercedes-benz-s-class": `Boston's executive sedan. ${v.year} S-Class with a vetted chauffeur from $${v.hourlyRate}/hr. Flat airport rates, gratuity and tolls included.`,
+    "volvo-s90": `Boston's quiet executive sedan. ${v.year} Volvo S90 with a vetted chauffeur from $${v.hourlyRate}/hr. Flat airport rates, gratuity and tolls included.`,
   };
 
-  const title = titles[v.slug] ?? `${v.name} with Chauffeur in Boston | BET`;
+  const title = titles[v.slug] ?? `${v.name} with Chauffeur in Boston`;
   const description =
     descriptions[v.slug] ??
     `Reserve a ${v.year} ${v.name} with a vetted Boston chauffeur. Seats ${v.seats} with ${v.luggage} bags. $${v.hourlyRate}/hr, or $${v.airportFlat} flat to Logan with flight tracking.`;

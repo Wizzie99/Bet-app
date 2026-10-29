@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, siteJsonLd } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,12 +16,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Boston Car Service & Logan Airport Transfers | BET",
-    template: "%s",
+    template: "%s | BET",
   },
-  description:
-    "Private car service in Boston. Late-model luxury fleet, vetted chauffeurs, flat Logan rates with flight tracking. Quotes include tolls and gratuity.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: "Boston Car Service & Logan Airport Transfers | BET",
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Boston Car Service & Logan Airport Transfers | BET",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +47,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
+        />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

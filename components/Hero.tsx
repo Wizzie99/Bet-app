@@ -12,8 +12,8 @@ const SLIDES = [
     alt: 'Two passengers in the back seat of a luxury sedan looking out at the city',
   },
   {
-    src: '/Images/hero1.jpg',
-    alt: 'Two luxury black SUVs parked in front of a mansion at night',
+    src: '/Images/Boston-Chauffeur-Escalade-Luggage.jpg',
+    alt: 'Chauffeur loading luggage into a black Cadillac Escalade outside a Boston hotel as a client arrives',
   },
 ];
 

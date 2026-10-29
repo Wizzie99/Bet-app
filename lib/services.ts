@@ -8,8 +8,8 @@
 // inherited from the copy deck. Replace with real numbers before launch and
 // keep them in agreement with the fleet data and service-area rates.
 
-export const PHONE_DISPLAY = "(857) 930-4661";
-export const PHONE_HREF = "tel:+18579304661";
+export const PHONE_DISPLAY = "(617) 251-8384";
+export const PHONE_HREF = "tel:+16172518384";
 export const SUPPORT_EMAIL = "support@bostonexclusive.com";
 export const SUPPORT_EMAIL_HREF = "mailto:support@bostonexclusive.com";
 
@@ -52,7 +52,7 @@ export const SERVICES: Service[] = [
     href: "/services/airport-transfers",
     summary:
       "Flat-rate rides to Logan and the regional airports, with flight tracking and 60 minutes of free wait time.",
-    title: "Boston Airport Transfers — Flat Rates & Flight Tracking | BET",
+    title: "Boston Airport Transfers — Flat Rates & Flight Tracking",
     description:
       "Flat-rate transfers to Logan, Hanscom, T.F. Green, Manchester and Worcester. We track your flight, wait 60 minutes free, and the quote includes tolls and gratuity.",
     h1: "Airport transfers, at a flat rate",
@@ -83,13 +83,13 @@ export const SERVICES: Service[] = [
       },
       {
         q: "How early should I book an airport pickup?",
-        a: "A day ahead guarantees your vehicle. Same-day is usually possible — call (857) 930-4661.",
+        a: "A day ahead guarantees your vehicle. Same-day is usually possible — call (617) 251-8384.",
       },
     ],
     ctaLabel: "Get your flat-rate quote",
     related: ["city-to-city", "group-travel"],
     image: {
-      src: "/Images/Airport-Transfert.jpg",
+      src: "/Images/Airport-Transfer.jpg",
       alt: "Chauffeur loading a suitcase into a black sedan at the airport curb",
     },
   },
@@ -100,7 +100,7 @@ export const SERVICES: Service[] = [
     href: "/services/hourly-chauffeur",
     summary:
       "Book a chauffeur and vehicle by the hour — three-hour minimum, unlimited stops, the car waits for you.",
-    title: "Hourly Chauffeur Service in Boston | BET",
+    title: "Hourly Chauffeur Service in Boston",
     description:
       "Book a chauffeur and vehicle by the hour in Boston. Three-hour minimum, unlimited stops, the car waits for you. From $112/hr with gratuity and tolls included.",
     h1: "An hourly chauffeur, the car stays with you",
@@ -148,7 +148,7 @@ export const SERVICES: Service[] = [
     href: "/services/city-to-city",
     summary:
       "Fixed-price chauffeured travel from Boston to New York, Cape Cod, Newport and beyond — no meter, no surge.",
-    title: "City-to-City Car Service from Boston — Fixed Rates | BET",
+    title: "City-to-City Car Service from Boston — Fixed Rates",
     description:
       "Fixed-price chauffeured travel from Boston to New York, Cape Cod, Newport, Portsmouth and beyond. No hourly meter, no surge. Door to door, work or sleep the whole way.",
     h1: "City to city, at a fixed price",
@@ -196,7 +196,7 @@ export const SERVICES: Service[] = [
     href: "/services/corporate",
     summary:
       "One account, monthly invoicing, cost-center reporting and priority dispatch for executives and clients.",
-    title: "Corporate Car Service in Boston — Accounts & Billing | BET",
+    title: "Corporate Car Service in Boston — Accounts & Billing",
     description:
       "Ground transportation for Boston companies. One account, monthly invoicing, cost-center reporting and priority dispatch for executives and visiting clients.",
     h1: "Corporate travel, on one account",
@@ -244,7 +244,7 @@ export const SERVICES: Service[] = [
     href: "/services/roadshows",
     summary:
       "Dedicated vehicles for investor days and analyst roadshows, routed around your meeting list and run to the minute.",
-    title: "Roadshow Transportation in Boston — Investor & Analyst Tours | BET",
+    title: "Roadshow Transportation in Boston — Investor & Analyst Tours",
     description:
       "Dedicated chauffeured vehicles for investor days and analyst roadshows in Boston. Full-day service, routes built around your meeting list, run to the minute.",
     h1: "Roadshows, run to the minute",
@@ -292,7 +292,7 @@ export const SERVICES: Service[] = [
     href: "/services/weddings",
     summary:
       "Wedding transportation timed to your photographer and venue, with multiple pickups and guest shuttles.",
-    title: "Wedding Limo & Car Service in Boston | BET",
+    title: "Wedding Limo & Car Service in Boston",
     description:
       "Chauffeured wedding transportation in Boston — timed to your photographer and venue, multiple pickups coordinated, guest shuttles available. From $595.",
     h1: "Wedding transportation, timed to your day",
@@ -340,7 +340,7 @@ export const SERVICES: Service[] = [
     href: "/services/event-travel",
     summary:
       "Chauffeured trips to Fenway, TD Garden, Gillette and more — dropped at the gate, picked up where you are.",
-    title: "Event & Game-Day Car Service in Boston — Fenway, Gillette, TD Garden | BET",
+    title: "Event & Game-Day Car Service in Boston — Fenway, Gillette, TD Garden",
     description:
       "Chauffeured transportation to Boston events — Fenway, TD Garden, Gillette Stadium, the Xfinity Center. Dropped at the gate, picked up where you are. No parking.",
     h1: "Event travel, dropped at the gate",
@@ -388,7 +388,7 @@ export const SERVICES: Service[] = [
     href: "/services/group-travel",
     summary:
       "Mercedes Sprinter group transport — 12 seats, 10 checked bags, standing headroom, everyone in one vehicle.",
-    title: "Group Transportation in Boston — Sprinter Van Service | BET",
+    title: "Group Transportation in Boston — Sprinter Van Service",
     description:
       "Mercedes Sprinter group transportation in Boston. 12 seats, 10 checked bags, standing headroom. Airport runs, corporate groups and family travel in one vehicle.",
     h1: "Group travel, everyone in one vehicle",

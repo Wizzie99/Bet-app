@@ -2,10 +2,15 @@ import type { Metadata } from 'next';
 
 import ContactForm from '@/components/ContactForm';
 
+const title = 'Reserve Your Ride';
+const description =
+  'Build your trip and get an instant estimate. No charge until a chauffeur is confirmed.';
+
 export const metadata: Metadata = {
-  title: 'Reserve Your Ride | BET Boston',
-  description:
-    'Build your trip and get an instant estimate. No charge until a chauffeur is confirmed.',
+  title,
+  description,
+  alternates: { canonical: '/reserve' },
+  openGraph: { title, description, url: '/reserve', type: 'website' },
 };
 
 export default function ReservePage() {

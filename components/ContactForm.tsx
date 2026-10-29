@@ -279,8 +279,8 @@ export default function ContactForm() {
         {/* Image column */}
         <div className="hidden lg:block flex-1 relative min-h-[743px]">
           <Image
-            src="/Images/hero1.jpg"
-            alt="Luxury vehicle"
+            src="/Images/Boston-Chauffeur-Escalade-Luggage.jpg"
+            alt="Chauffeur loading luggage into a black Cadillac Escalade outside a Boston hotel"
             fill
             className="object-cover"
             sizes="50vw"

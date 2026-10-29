@@ -19,11 +19,11 @@ import s from "./fleet-index.module.css";
 const geist = Geist({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono" });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://YOUR-DOMAIN.com";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivelivery.com";
 
-const title = "Luxury Fleet — Sedans, SUVs & Sprinters | BET Boston";
+const title = "Luxury Fleet — Sedans, SUVs & Sprinters";
 const description =
-  "Choose from the S-Class, Escalade, Suburban, Sprinter and more. Seats, luggage capacity, and hourly rates listed for every vehicle.";
+  "Choose from the S-Class, Volvo S90, Escalade, Suburban, Sprinter and more. Seats, luggage capacity, and hourly rates listed for every vehicle.";
 
 export const metadata: Metadata = {
   title,
@@ -166,8 +166,8 @@ export default function FleetIndexPage() {
               Reserve now
               <ArrowOutwardIcon />
             </Link>
-            <a href="tel:+18579304661" className={s.ctaTel}>
-              24/7&nbsp;&nbsp;(857)&nbsp;930-4661
+            <a href="tel:+16172518384" className={s.ctaTel}>
+              24/7&nbsp;&nbsp;(617)&nbsp;251-8384
             </a>
           </div>
         </section>

@@ -3,10 +3,15 @@ import Link from 'next/link';
 
 import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/services';
 
+const title = 'FAQ — Rates, Cancellations & Vehicles';
+const description =
+  "What's in the price, how cancellation works, vehicle capacities, and how flight tracking handles delays.";
+
 export const metadata: Metadata = {
-  title: 'FAQ — Rates, Cancellations, Vehicles | BET Boston',
-  description:
-    "What's in the price, how cancellation works, vehicle capacities, and how flight tracking handles delays.",
+  title,
+  description,
+  alternates: { canonical: '/faq' },
+  openGraph: { title, description, url: '/faq', type: 'website' },
 };
 
 const FAQS = [

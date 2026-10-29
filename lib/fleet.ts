@@ -24,6 +24,26 @@ export type Vehicle = {
 
 export const FLEET: Vehicle[] = [
   {
+    slug: "volvo-s90",
+    name: "Volvo S90",
+    tier: "Business Class",
+    klass: "Premium Sedan",
+    year: 2025,
+    seats: 3,
+    luggage: 3,
+    hourlyRate: 112,
+    airportFlat: 145,
+    blurb:
+      "A quiet executive sedan for two or three. Rear bench with a fold-down armrest, room for three checked bags, and a smooth ride from Logan into the city.",
+    gallery: [
+      { src: "/Images/Volvo-S90-Frontal.jpg", alt: "2025 Volvo S90, front three-quarter view on the Boston waterfront" },
+      { src: "/Images/Volvo-S90-Interior-Dashboard.jpg", alt: "Volvo S90 front seats and dashboard" },
+      { src: "/Images/Volvo-S90-Interior-Back.jpg", alt: "Volvo S90 rear bench" },
+      { src: "/Images/Volvo-S90-Interior-Front.jpg", alt: "Volvo S90 cabin looking forward from the rear seat" },
+    ],
+    cardImage: "/Images/Volvo-S90-Frontal.jpg",
+  },
+  {
     slug: "chevrolet-suburban",
     name: "Chevrolet Suburban",
     tier: "Business Class",
@@ -37,11 +57,31 @@ export const FLEET: Vehicle[] = [
       "Our most-booked vehicle for Logan runs and executive travel. Seven seats with second-row captain's chairs, room for six checked bags, and enough quiet in the back to take a call on the way in from the airport.",
     gallery: [
       { src: "/Images/Chevrolet-Suburban-Frontal.jpg", alt: "2025 Chevrolet Suburban, front three-quarter view on the Boston waterfront" },
-      { src: "/Images/Chevrolet-Suburban-Interior-Fron't Seat.png", alt: "Suburban front seats and dashboard" },
-      { src: "/Images/Chevrolet-Suburban-Interior.png", alt: "Suburban cabin looking through to the third row" },
-      { src: "/Images/Chevrolet-Suburban-Interior-Middle- Seat.png", alt: "Suburban second-row seating" },
+      { src: "/Images/Chevrolet-Suburban-Interior-Front-Seat.jpg", alt: "Suburban front seats and dashboard" },
+      { src: "/Images/Chevrolet-Suburban-Interior.jpg", alt: "Suburban cabin looking through to the third row" },
+      { src: "/Images/Chevrolet-Suburban-Interior-Middle-Seat.jpg", alt: "Suburban second-row seating" },
     ],
     cardImage: "/Images/Chevrolet-Suburban-Frontal.jpg",
+  },
+  {
+    slug: "mercedes-benz-s-class",
+    name: "Mercedes-Benz S-Class",
+    tier: "Business Class",
+    klass: "Premium Sedan",
+    year: 2025,
+    seats: 4,
+    luggage: 4,
+    hourlyRate: 112,
+    airportFlat: 145,
+    blurb:
+      "The executive sedan. Four seats, four checked bags, and the smoothest ride in the fleet for a solo traveler or a pair heading downtown.",
+    gallery: [
+      { src: "/Images/Mercedes-Benz-S-Class-Exterior.jpg", alt: "2025 Mercedes-Benz S-Class, front three-quarter view" },
+      { src: "/Images/S-Class-Front-Seat.jpg", alt: "S-Class front seats" },
+      { src: "/Images/S-Class-Interior.jpg", alt: "S-Class rear bench" },
+      { src: "/Images/S-Class-Back-Interior.jpg", alt: "S-Class rear cabin" },
+    ],
+    cardImage: "/Images/Mercedes-Benz-S-Class-Exterior.jpg",
   },
   {
     slug: "cadillac-escalade",
@@ -62,26 +102,6 @@ export const FLEET: Vehicle[] = [
       { src: "/Images/Escalade-Trunk.jpg", alt: "Escalade cargo area" },
     ],
     cardImage: "/Images/Cadillac-Escalade-Exterior.jpg",
-  },
-  {
-    slug: "mercedes-benz-s-class",
-    name: "Mercedes-Benz S-Class",
-    tier: "Business Class",
-    klass: "Premium Sedan",
-    year: 2025,
-    seats: 4,
-    luggage: 4,
-    hourlyRate: 112,
-    airportFlat: 145,
-    blurb:
-      "The executive sedan. Four seats, four checked bags, and the smoothest ride in the fleet for a solo traveler or a pair heading downtown.",
-    gallery: [
-      { src: "/Images/Mercedes-Benz-S-Clas-Exterior.jpg", alt: "2025 Mercedes-Benz S-Class, front three-quarter view" },
-      { src: "/Images/S-Class-Frist set.png", alt: "S-Class front seats" },
-      { src: "/Images/S-Class interior.png", alt: "S-Class rear bench" },
-      { src: "/Images/S-Class-Back-Interior.png", alt: "S-Class rear cabin" },
-    ],
-    cardImage: "/Images/Mercedes-Benz-S-Clas-Exterior.jpg",
   },
   {
     slug: "mercedes-benz-sprinter",

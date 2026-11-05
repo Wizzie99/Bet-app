@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
+import FAQSection from '@/components/faq/FAQSection';
+import { faqJsonLd } from '@/lib/faqs';
 import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/services';
 
-const title = 'FAQ — Rates, Cancellations & Vehicles';
+const title = 'FAQ — Rates, Logan Pickups, Vehicles & Policies';
 const description =
-  "What's in the price, how cancellation works, vehicle capacities, and how flight tracking handles delays.";
+  'Answers on pricing and gratuity, cancellations, Logan Airport pickups and flight delays, vehicle capacity, weddings and events, and where we drive.';
 
 export const metadata: Metadata = {
   title,
@@ -14,38 +15,32 @@ export const metadata: Metadata = {
   openGraph: { title, description, url: '/faq', type: 'website' },
 };
 
-const FAQS = [
-  {
-    q: "What's in the price?",
-    a: 'Every quote includes taxes, tolls, and a 20% chauffeur gratuity. The price you see is the price you pay.',
-  },
-  {
-    q: 'How does cancellation work?',
-    a: 'Cancel or change within two hours of pickup and we charge 50%. No-shows are billed in full.',
-  },
-  {
-    q: 'What if my flight is delayed?',
-    a: 'Add your flight number and we track it from wheels-up. If you land 45 minutes late, your pickup moves 45 minutes, free.',
-  },
-  {
-    q: 'How many people and bags can we take?',
-    a: 'Each vehicle page lists seats and luggage. If you are over that, call us and we will send a Sprinter or a second car.',
-  },
-];
-
 export default function FaqPage() {
   return (
     <div className="w-full bg-[#eff0eb] text-[#191a19]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd()) }}
+      />
       <div className="max-w-[800px] mx-auto px-5 py-16 lg:px-16 lg:py-24 flex flex-col gap-10">
         <div className="flex flex-col gap-4">
+          <p
+            className="text-[12px] uppercase tracking-[-0.36px] text-[#595a59]"
+            style={{ fontFamily: "'Geist Mono', ui-monospace, Menlo, monospace" }}
+          >
+            FAQ
+          </p>
           <h1
             className="text-[clamp(36px,5vw,48px)] leading-[1.2] tracking-[-0.96px]"
             style={{ fontFamily: "'Lastik', Georgia, serif", fontWeight: 400 }}
           >
-            Rates, cancellations, vehicles
+            Questions, answered
           </h1>
-          <p className="text-[18px] leading-[26px] text-[#595a59]" style={{ fontFamily: "'Geist', sans-serif" }}>
-            Faster answers by phone:{' '}
+          <p
+            className="text-[18px] leading-[26px] text-[#595a59]"
+            style={{ fontFamily: "'Geist', sans-serif" }}
+          >
+            Pricing, cancellations, Logan pickups, vehicles, and events. Faster answers by phone:{' '}
             <a href={PHONE_HREF} className="underline underline-offset-2">
               {PHONE_DISPLAY}
             </a>
@@ -53,25 +48,7 @@ export default function FaqPage() {
           </p>
         </div>
 
-        <dl className="flex flex-col gap-8">
-          {FAQS.map((item) => (
-            <div key={item.q} className="flex flex-col gap-2">
-              <dt className="text-[20px] leading-[26px] tracking-[-0.4px]" style={{ fontFamily: "'Geist', sans-serif", fontWeight: 500 }}>
-                {item.q}
-              </dt>
-              <dd className="text-[16px] leading-[24px] text-[#595a59]" style={{ fontFamily: "'Geist', sans-serif" }}>
-                {item.a}
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <Link
-          href="/reserve"
-          className="inline-flex w-fit items-center px-5 py-3 rounded-full bg-[#1c60ff] text-[#0c0d0f] font-['Geist_Mono',monospace] text-[15px] uppercase"
-        >
-          Get a quote
-        </Link>
+        <FAQSection />
       </div>
     </div>
   );

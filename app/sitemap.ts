@@ -6,7 +6,7 @@ import { SERVICES } from "@/lib/services";
 // Keep this in sync with the canonical/OG URLs in the page files, which read
 // from the same env var.
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivelivery.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivetransportation.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

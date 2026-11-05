@@ -2,7 +2,7 @@
 // Keep the domain here in sync with app/sitemap.ts and app/robots.ts.
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivelivery.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivetransportation.com";
 
 export const SITE_NAME = "Boston Exclusive Transportation";
 export const SITE_SHORT = "BET";
@@ -47,11 +47,12 @@ export function siteJsonLd() {
     email: SUPPORT_EMAIL,
     telephone: PHONE_PRIMARY,
     priceRange: "$$$",
-    // TODO: add streetAddress + postalCode when available.
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Boston",
+      streetAddress: "15 Quarry Ln",
+      addressLocality: "Malden",
       addressRegion: "MA",
+      postalCode: "02148",
       addressCountry: "US",
     },
     areaServed: [

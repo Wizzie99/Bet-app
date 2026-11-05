@@ -1,8 +1,26 @@
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
+
+const CARD_BORDER =
+  'linear-gradient(160deg, rgba(196,196,196,0.28) 0%, rgba(140,140,140,0.1) 45%, rgba(28,96,255,0.4) 100%)';
+
+function cardStyle(fill: string): CSSProperties {
+  return {
+    background: `linear-gradient(${fill}, ${fill}) padding-box, ${CARD_BORDER} border-box`,
+    border: '1px solid transparent',
+  };
+}
 
 export default function FeaturesGrid() {
   return (
-    <section className="w-full bg-white py-16 px-4 sm:px-8">
+    <section
+      className="relative w-full overflow-hidden py-16 px-4 sm:px-8"
+      style={{
+        backgroundColor: '#0C0D0F',
+        backgroundImage:
+          'radial-gradient(ellipse 70% 80% at 0% 100%, rgba(28, 96, 255, 0.08) 0%, transparent 70%)',
+      }}
+    >
       <div className="max-w-[1352px] mx-auto flex flex-col lg:flex-row lg:items-stretch gap-2 w-full">
 
         {/* ── Column 1 ─────────────────────────────────────────────── */}
@@ -11,7 +29,7 @@ export default function FeaturesGrid() {
           {/* On time, every time — with map image */}
           <div
             className="flex flex-1 flex-col overflow-hidden rounded-2xl min-h-0"
-            style={{ background: '#131618', border: '0.1px solid #1d2019' }}
+            style={cardStyle('#131618')}
           >
             {/* Text header */}
             <div className="flex gap-6 items-end p-4">
@@ -60,7 +78,7 @@ export default function FeaturesGrid() {
           {/* Pay securely — Stripe */}
           <div
             className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
-            style={{ background: '#131618', border: '0.1px solid #1d2019' }}
+            style={cardStyle('#131618')}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">
@@ -101,7 +119,7 @@ export default function FeaturesGrid() {
           {/* Vetted chauffeurs */}
           <div
             className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
-            style={{ background: '#131618', border: '0.1px solid #1d2019' }}
+            style={cardStyle('#131618')}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">
@@ -159,10 +177,7 @@ export default function FeaturesGrid() {
           {/* Sign Up — blue promo card */}
           <div
             className="flex-1 flex p-4 rounded-2xl min-h-[360px] lg:min-h-0"
-            style={{
-              background: '#1c60ff',
-              border: '0.1px solid #1d2019',
-            }}
+            style={cardStyle('#1c60ff')}
           >
             <div className="flex flex-col gap-6 justify-end">
               <div className="flex flex-col gap-[58px]">
@@ -203,10 +218,7 @@ export default function FeaturesGrid() {
           {/* Flight tracking card */}
           <div
             className="relative overflow-hidden rounded-2xl flex-1 min-h-[520px]"
-            style={{
-              background: '#131618',
-              border: '0.2px solid #8c8c8c',
-            }}
+            style={cardStyle('#131618')}
           >
             {/* Top text */}
             <div className="absolute top-0 left-0 right-0 z-10 flex gap-6 items-end p-4">
@@ -331,7 +343,7 @@ export default function FeaturesGrid() {
           {/* Clean & Sanitized Vehicles */}
           <div
             className="flex items-center gap-1 p-4 rounded-2xl shrink-0 min-h-[136px]"
-            style={{ background: '#131618', border: '0.1px solid #1d2019' }}
+            style={cardStyle('#131618')}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="flex items-center gap-2">

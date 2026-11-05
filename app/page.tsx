@@ -25,13 +25,13 @@ export default function Home() {
     <main className="flex-1 w-full min-h-0">
       <Hero />
       <Reveal>
+        <FleetSection />
+      </Reveal>
+      <Reveal>
         <FeaturesGrid />
       </Reveal>
       <Reveal>
         <StatsSection />
-      </Reveal>
-      <Reveal>
-        <FleetSection />
       </Reveal>
       <Reveal>
         <ContactForm />

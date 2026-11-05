@@ -9,11 +9,14 @@ import Link from 'next/link';
 const SLIDES = [
   {
     src: '/Images/Hero-Image.jpg',
+    mobileSrc: '/Images/Hero-Image-Mobile.jpg',
     alt: 'Two passengers in the back seat of a luxury sedan looking out at the city',
   },
   {
     src: '/Images/Boston-Chauffeur-Escalade-Luggage.jpg',
+    mobileSrc: '/Images/Hero-Image-2.jpg',
     alt: 'Chauffeur loading luggage into a black Cadillac Escalade outside a Boston hotel as a client arrives',
+    mobileAlt: 'Chauffeur holding a suitcase beside an open Escalade while a client arrives at a hotel entrance',
   },
 ];
 
@@ -136,12 +139,22 @@ export default function Hero() {
           style={{ opacity: i === current ? 1 : 0 }}
           aria-hidden={i !== current}
         >
+          {/* Mobile — portrait crop */}
+          <Image
+            src={slide.mobileSrc}
+            alt={slide.mobileAlt ?? slide.alt}
+            fill
+            priority={i === 0}
+            className="pointer-events-none object-cover object-center md:hidden"
+            sizes="100vw"
+          />
+          {/* Desktop / tablet — landscape */}
           <Image
             src={slide.src}
             alt={slide.alt}
             fill
             priority={i === 0}
-            className="pointer-events-none object-cover object-center"
+            className="pointer-events-none object-cover object-center hidden md:block"
             sizes="100vw"
           />
         </div>

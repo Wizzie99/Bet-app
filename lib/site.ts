@@ -2,7 +2,8 @@
 // Keep the domain here in sync with app/sitemap.ts and app/robots.ts.
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bostonexclusivetransportation.com";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://www.bostonexclusivetransportation.com";
 
 export const SITE_NAME = "Boston Exclusive Transportation";
 export const SITE_SHORT = "BET";

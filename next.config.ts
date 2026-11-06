@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 // or www) is permanently redirected (308) to the matching path on the new
 // canonical domain. Keep in sync with NEXT_PUBLIC_SITE_URL / lib/site.ts.
 const OLD_DOMAIN = "bostonexclusivelivery.com";
-const NEW_ORIGIN = "https://bostonexclusivetransportation.com";
+const NEW_ORIGIN = "https://www.bostonexclusivetransportation.com";
 
 const nextConfig: NextConfig = {
   async redirects() {

@@ -48,6 +48,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="describedby" href={`${SITE_URL}/llms.txt`} />
+      </head>
       <body className="min-h-full flex flex-col">
         <Script
           src="https://www.googletagmanager.com/gtm.js?id=GTM-PGLTB7QB"

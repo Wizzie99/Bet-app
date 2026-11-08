@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 
-import ContactForm from '@/components/ContactForm';
+import BookingWidget from '@/components/BookingWidget';
 
 const title = 'Reserve Your Ride';
 const description =
-  'Build your trip and get an instant estimate. No charge until a chauffeur is confirmed.';
+  'Book a Boston car online. Get an instant quote and pay securely, or call us 24/7.';
 
 export const metadata: Metadata = {
   title,
@@ -14,9 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function ReservePage() {
-  return (
-    <div className="w-full bg-[#131618]">
-      <ContactForm />
-    </div>
-  );
+  return <BookingWidget />;
 }

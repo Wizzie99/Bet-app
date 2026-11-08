@@ -18,7 +18,7 @@ const FLEET: VehicleCardProps[] = [
       { src: '/Images/Volvo-S90-Interior-Back.jpg', alt: 'Volvo S90 rear bench' },
       { src: '/Images/Volvo-S90-Interior-Front.jpg', alt: 'Volvo S90 cabin looking forward from the rear seat' },
     ],
-    reserveHref: '/reserve?vehicle=volvo-s90',
+    reserveHref: '/reserve',
     detailHref: '/fleet/volvo-s90',
   },
   {
@@ -33,7 +33,7 @@ const FLEET: VehicleCardProps[] = [
       { src: '/Images/Chevrolet-Suburban-Interior.jpg', alt: 'Chevrolet Suburban cabin' },
       { src: '/Images/Chevrolet-Suburban-Interior-Middle-Seat.jpg', alt: 'Chevrolet Suburban second-row seats' },
     ],
-    reserveHref: '/reserve/chevrolet-suburban',
+    reserveHref: '/reserve',
     detailHref: '/fleet/chevrolet-suburban',
   },
   {
@@ -48,7 +48,7 @@ const FLEET: VehicleCardProps[] = [
       { src: '/Images/S-Class-Interior.jpg', alt: 'Mercedes-Benz S-Class rear bench' },
       { src: '/Images/S-Class-Back-Interior.jpg', alt: 'Mercedes-Benz S-Class rear cabin' },
     ],
-    reserveHref: '/reserve/s-class',
+    reserveHref: '/reserve',
     detailHref: '/fleet/mercedes-benz-s-class',
   },
   {
@@ -63,7 +63,7 @@ const FLEET: VehicleCardProps[] = [
       { src: '/Images/Cadillac-Escalade-Interior-Back.jpg', alt: 'Cadillac Escalade second-row seats' },
       { src: '/Images/Escalade-Trunk.jpg', alt: 'Cadillac Escalade cargo area' },
     ],
-    reserveHref: '/reserve/escalade',
+    reserveHref: '/reserve',
     detailHref: '/fleet/cadillac-escalade',
   },
   {
@@ -75,7 +75,7 @@ const FLEET: VehicleCardProps[] = [
     images: [
       { src: '/Images/Mercedes-Benz-Sprinter.jpg', alt: 'Mercedes-Benz Sprinter front three-quarter' },
     ],
-    reserveHref: '/reserve/sprinter',
+    reserveHref: '/reserve',
     detailHref: '/fleet/mercedes-benz-sprinter',
   },
 ];

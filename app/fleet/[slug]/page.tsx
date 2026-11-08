@@ -316,7 +316,7 @@ export default async function VehicleDetailPage({
 
       {/* ── Sticky reserve bar ── */}
       <div className={s.reserveBar}>
-        <Link href={`/reserve?vehicle=${v.slug}`} className={s.reserveLink}>
+        <Link href="/reserve" className={s.reserveLink}>
           Reserve Now
         </Link>
       </div>

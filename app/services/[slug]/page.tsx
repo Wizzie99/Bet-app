@@ -168,7 +168,7 @@ export default async function ServiceDetailPage({
             </p>
           </div>
           <div className={s.ctaActions}>
-            <Link href={`/reserve?service=${service.slug}`} className={s.ctaPrimary}>
+            <Link href="/reserve" className={s.ctaPrimary}>
               {service.ctaLabel}
               <ArrowOutwardIcon />
             </Link>

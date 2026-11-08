@@ -5,7 +5,7 @@ import { PHONE_DISPLAY } from '@/lib/services';
 
 const title = `Contact — Quotes 24/7, Call ${PHONE_DISPLAY}`;
 const description =
-  'Get a quote by form, email, or phone. We answer 24/7 and most quotes come back within 15 minutes.';
+  'Get a quote online, by email, or by phone. We answer 24/7.';
 
 export const metadata: Metadata = {
   title,

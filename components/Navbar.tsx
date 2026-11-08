@@ -45,22 +45,30 @@ function Logo({ size = 'md' }: { size?: 'sm' | 'md' }) {
   );
 }
 
-function ReserveButton({ className = '' }: { className?: string }) {
+export function ReserveButton({
+  className = '',
+  label = 'Get a quote',
+  textClassName = 'text-[#0c0d0f]',
+}: {
+  className?: string;
+  label?: string;
+  textClassName?: string;
+}) {
   return (
     <Link
       href="/reserve"
       className={`
         inline-flex items-center gap-1.5 px-5 py-3 rounded-full
-        bg-[#1c60ff] text-[#0c0d0f]
+        bg-[#1c60ff] ${textClassName}
         font-['Geist_Mono',monospace] font-medium text-[16px] leading-5 tracking-[-0.03em]
         uppercase transition-opacity hover:opacity-90 whitespace-nowrap
         ${className}
       `}
     >
-      Get a quote
+      {label}
       {/* Arrow outward icon */}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M9 5H19M19 5V15M19 5L5 19" stroke="#0c0d0f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9 5H19M19 5V15M19 5L5 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </Link>
   );

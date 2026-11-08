@@ -89,8 +89,8 @@ export const SERVICES: Service[] = [
     ctaLabel: "Get your flat-rate quote",
     related: ["city-to-city", "group-travel"],
     image: {
-      src: "/Images/Airport-Transfer.jpg",
-      alt: "Chauffeur loading a suitcase into a black sedan at the airport curb",
+      src: "/Images/occasions/airport.jpg",
+      alt: "Chauffeur greeting travelers with luggage beside a black Suburban",
     },
   },
   {
@@ -140,6 +140,10 @@ export const SERVICES: Service[] = [
     ],
     ctaLabel: "Book an hourly chauffeur",
     related: ["corporate", "city-to-city"],
+    image: {
+      src: "/Images/occasions/hourly.jpg",
+      alt: "Chauffeur holding a briefcase beside a black sedan as a passenger steps out",
+    },
   },
   {
     slug: "city-to-city",
@@ -236,6 +240,10 @@ export const SERVICES: Service[] = [
     ],
     ctaLabel: "Open a corporate account",
     related: ["roadshows", "group-travel"],
+    image: {
+      src: "/Images/occasions/corporate.jpg",
+      alt: "Three business travelers walking through an airport terminal with luggage",
+    },
   },
   {
     slug: "roadshows",
@@ -332,6 +340,10 @@ export const SERVICES: Service[] = [
     ],
     ctaLabel: "Plan your wedding transportation",
     related: ["event-travel", "group-travel"],
+    image: {
+      src: "/Images/occasions/wedding.jpg",
+      alt: "A bride and groom smiling in the back seat with a bouquet of white roses",
+    },
   },
   {
     slug: "event-travel",
@@ -380,6 +392,10 @@ export const SERVICES: Service[] = [
     ],
     ctaLabel: "Book event travel",
     related: ["weddings", "group-travel"],
+    image: {
+      src: "/Images/occasions/events.jpg",
+      alt: "A couple dressed for the evening riding in the back of a car at dusk",
+    },
   },
   {
     slug: "group-travel",
@@ -428,6 +444,10 @@ export const SERVICES: Service[] = [
     ],
     ctaLabel: "Book group transportation",
     related: ["corporate", "event-travel"],
+    image: {
+      src: "/Images/occasions/group.jpg",
+      alt: "A group arriving at a hotel as a chauffeur holds the door of a black van",
+    },
   },
 ];
 

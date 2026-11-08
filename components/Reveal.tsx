@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState, type ElementType, type ReactNode } from 'react';
 
 type RevealProps = {
   children: ReactNode;
@@ -28,7 +28,7 @@ export default function Reveal({
   direction = 'up',
   delay = 0,
   offset = 24,
-  threshold = 0.15,
+  threshold = 0,
   as,
   className = '',
 }: RevealProps) {
@@ -36,12 +36,24 @@ export default function Reveal({
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = ref.current;
     if (!node) return;
 
     // If IntersectionObserver is unavailable, just show the content.
     if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+
+    // Reveal anything already on screen before the first paint. Otherwise a
+    // section peeking in under the hero stays at opacity 0.
+    const rect = node.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const alreadyVisible =
+      rect.bottom > 0 && rect.top < viewportHeight && rect.right > 0 && rect.left < viewportWidth;
+    if (alreadyVisible) {
       setVisible(true);
       return;
     }
@@ -55,7 +67,7 @@ export default function Reveal({
           }
         }
       },
-      { threshold, rootMargin: '0px 0px -10% 0px' },
+      { threshold },
     );
 
     observer.observe(node);

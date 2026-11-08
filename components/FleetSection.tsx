@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ChevronLeftIcon, ChevronRightIcon } from './FleetIcons';
+import CarouselArrow from './CarouselArrow';
 import VehicleCard, { VehicleCardProps } from './VehicleCard';
 
 const FLEET: VehicleCardProps[] = [
@@ -80,58 +80,52 @@ const FLEET: VehicleCardProps[] = [
   },
 ];
 
+const arrowButtonClass = (active: boolean) =>
+  `flex h-10 w-10 items-center justify-center rounded-[4px] transition-[transform,background-color,color] duration-150 disabled:cursor-default enabled:hover:-translate-y-0.5 ${
+    active ? 'bg-[#131618] text-[#eff0eb]' : 'bg-[#f3f4f1] text-[#1c1b1f]'
+  }`;
+
 export default function FleetSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
+  const [canScrollBack, setCanScrollBack] = useState(false);
+  const [canScrollForward, setCanScrollForward] = useState(true);
 
-  const cardsInScroller = () =>
-    Array.from(scrollerRef.current?.querySelectorAll<HTMLElement>('[data-fleet-card]') ?? []);
-
-  const syncActive = useCallback(() => {
+  const updateControls = useCallback(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const cards = cardsInScroller();
-    if (cards.length === 0) return;
-    const mid = el.scrollLeft + el.clientWidth / 2;
-    let nearest = 0;
-    let nearestDist = Number.POSITIVE_INFINITY;
-    cards.forEach((card, index) => {
-      const center = card.offsetLeft + card.offsetWidth / 2;
-      const dist = Math.abs(center - mid);
-      if (dist < nearestDist) {
-        nearest = index;
-        nearestDist = dist;
-      }
-    });
-    setActive(nearest);
+    setCanScrollBack(el.scrollLeft > 2);
+    setCanScrollForward(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
   }, []);
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    syncActive();
-    el.addEventListener('scroll', syncActive, { passive: true });
-    window.addEventListener('resize', syncActive);
+    updateControls();
+    const resizeObserver = new ResizeObserver(updateControls);
+    resizeObserver.observe(el);
+    el.addEventListener('scroll', updateControls, { passive: true });
     return () => {
-      el.removeEventListener('scroll', syncActive);
-      window.removeEventListener('resize', syncActive);
+      resizeObserver.disconnect();
+      el.removeEventListener('scroll', updateControls);
     };
-  }, [syncActive]);
+  }, [updateControls]);
 
-  const scrollToCard = (index: number) => {
-    const cards = cardsInScroller();
-    const next = (index + cards.length) % cards.length;
-    cards[next]?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-    setActive(next);
+  const scroll = (direction: -1 | 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>('[data-fleet-card]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({
+      left: direction * (card?.offsetWidth ?? el.clientWidth * 0.75),
+      behavior: reduced ? 'auto' : 'smooth',
+    });
   };
 
   return (
-    <section
-      className="w-full py-16 px-4 sm:px-8"
-      style={{ background: '#ffffff' }}
-    >
+    <section className="w-full overflow-hidden bg-[#eff0eb] py-16 lg:py-24">
+      <div className="mx-auto w-full max-w-[1440px] px-5 lg:px-16">
       {/* Header */}
-      <div className="max-w-[1352px] mx-auto mb-16 flex flex-col gap-6 md:flex-row md:items-start md:justify-between px-4">
+      <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
         <h2
           style={{
             fontFamily: "'Lastik', 'Georgia', serif",
@@ -158,16 +152,16 @@ export default function FleetSection() {
             color: '#595a59',
           }}
         >
-          From a Mercedes S-Class for two to motor coaches for fifty-five —
-          every vehicle is late-model, detailed, and driven by one of our own
-          chauffeurs. Airport transfers are flat-rate.
+          From a Volvo S90 to a Mercedes Sprinter for 12 — every vehicle is
+          late-model, detailed, and driven by one of our own chauffeurs.
+          Airport transfers are flat-rate.
         </p>
       </div>
 
       {/* Cards — always horizontal scroll */}
       <div
         ref={scrollerRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4"
+        className="-ml-4 -mr-5 flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 pr-5 lg:-mr-16 lg:pr-16"
         style={{ scrollbarWidth: 'none' }}
       >
         {FLEET.map((vehicle) => (
@@ -175,23 +169,26 @@ export default function FleetSection() {
         ))}
       </div>
 
-      <div className="mx-auto mt-2 flex max-w-[1352px] items-center justify-center gap-3 px-4">
+      <div className="mt-2 flex items-center justify-start gap-3">
         <button
           type="button"
-          onClick={() => scrollToCard(active - 1)}
+          onClick={() => scroll(-1)}
           aria-label="Previous vehicle"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#515c65] bg-[#131618] text-[#eff0eb] transition-opacity hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+          disabled={!canScrollBack}
+          className={arrowButtonClass(canScrollBack)}
         >
-          <ChevronLeftIcon className="h-5 w-5" />
+          <CarouselArrow direction="left" />
         </button>
         <button
           type="button"
-          onClick={() => scrollToCard(active + 1)}
+          onClick={() => scroll(1)}
           aria-label="Next vehicle"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#515c65] bg-[#131618] text-[#eff0eb] transition-opacity hover:border-[#1c60ff] hover:bg-[#1c60ff]"
+          disabled={!canScrollForward}
+          className={arrowButtonClass(canScrollForward)}
         >
-          <ChevronRightIcon className="h-5 w-5" />
+          <CarouselArrow direction="right" />
         </button>
+      </div>
       </div>
     </section>
   );

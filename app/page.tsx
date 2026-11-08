@@ -3,8 +3,10 @@ import Hero from '@/components/Hero';
 import FeaturesGrid from '@/components/FeaturesGrid';
 import StatsSection from '@/components/StatsSection';
 import FleetSection from '@/components/FleetSection';
+import OccasionShowcase from '@/components/OccasionShowcase';
 import ContactForm from '@/components/ContactForm';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import TransportationFAQ from '@/components/TransportationFAQ';
 import Reveal from '@/components/Reveal';
 
 const title = 'Boston Car Service & Logan Airport Transfers';
@@ -28,6 +30,9 @@ export default function Home() {
         <FleetSection />
       </Reveal>
       <Reveal>
+        <OccasionShowcase />
+      </Reveal>
+      <Reveal>
         <FeaturesGrid />
       </Reveal>
       <Reveal>
@@ -38,6 +43,9 @@ export default function Home() {
       </Reveal>
       <Reveal>
         <TestimonialsSection />
+      </Reveal>
+      <Reveal>
+        <TransportationFAQ />
       </Reveal>
     </main>
   );

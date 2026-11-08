@@ -1,0 +1,288 @@
+/* Transportation FAQ — Figma node 1230:2160. */
+
+.section {
+  --ink: #000;
+  --title: #2e2e2d;
+  --body: #595a59;
+  --rule: #898987;
+  --card-border: #bbbcb8;
+  --card-bg: #f7f7f5;
+  --accent: #1c60ff;
+  --accent-hover: #104fdc;
+  --button-text: #f9f9f9;
+  --font-display: "Lastik", Georgia, "Times New Roman", serif;
+
+  position: relative;
+  overflow: hidden;
+  min-height: 1089px;
+  background: #eff0eb;
+  color: var(--title);
+}
+
+@font-face {
+  font-family: "Lastik";
+  src: url("/fonts/Lastik-Free.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.backgroundMark {
+  position: absolute;
+  top: 445px;
+  left: -101px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, 350px) minmax(0, 722px);
+  justify-content: space-between;
+  gap: 56px;
+  width: min(1254px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 94px 0 80px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.96px;
+  color: var(--ink);
+}
+
+.contactCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 259px;
+  margin-top: 28px;
+  padding: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+}
+
+.contactPrompt {
+  margin: 0;
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.36px;
+  color: var(--body);
+}
+
+.contactButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--accent);
+  font-family: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.48px;
+  color: var(--button-text);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.contactButton:hover {
+  background: var(--accent-hover);
+}
+
+.contactButton:active {
+  transform: translateY(1px);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.number {
+  padding-top: 1px;
+  font-family: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.48px;
+  color: var(--body);
+}
+
+.content {
+  min-width: 0;
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.triggerLabel {
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+  color: var(--title);
+}
+
+.icon {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.answerReveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 260ms ease,
+    opacity 180ms ease;
+}
+
+.answerReveal > div {
+  overflow: hidden;
+}
+
+.answerReveal[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.answer {
+  max-width: 469px;
+  margin: 0;
+  padding-top: 24px;
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--body);
+}
+
+.trigger:focus-visible,
+.contactButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    min-height: 0;
+  }
+
+  .backgroundMark {
+    top: 380px;
+    left: -300px;
+    opacity: 0.8;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    width: min(722px, calc(100% - 48px));
+    padding-top: 64px;
+  }
+
+  .intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .contactCard {
+    flex: 0 0 259px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .backgroundMark {
+    top: 500px;
+    left: -390px;
+  }
+
+  .layout {
+    width: calc(100% - 32px);
+    gap: 48px;
+    padding: 40px 0 56px;
+  }
+
+  .intro {
+    display: block;
+  }
+
+  .title {
+    font-size: 42px;
+    letter-spacing: -0.84px;
+  }
+
+  .contactCard {
+    width: 100%;
+    margin-top: 28px;
+    flex: none;
+  }
+
+  .item {
+    padding: 15px 0;
+  }
+
+  .trigger {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .triggerLabel {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.54px;
+  }
+
+  .answer {
+    max-width: none;
+    padding-top: 20px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answerReveal,
+  .contactButton {
+    transition: none;
+  }
+}

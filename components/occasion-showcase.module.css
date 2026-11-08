@@ -1,0 +1,222 @@
+/* Every Occasion carousel — Figma node 1203:2142. */
+
+.showcase {
+  --ink: #191a19;
+  --body: #595a59;
+  --muted: #898987;
+  --button: #131618;
+  --font-display: "Lastik", Georgia, "Times New Roman", serif;
+
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  background: #eff0eb;
+  color: var(--ink);
+}
+
+@font-face {
+  font-family: "Lastik";
+  src: url("/fonts/Lastik-Free.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.intro {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 501px);
+  gap: clamp(48px, 8vw, 128px);
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.title {
+  width: min(402px, 100%);
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 3.333vw, 48px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.96px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.lede {
+  margin: 0;
+  color: var(--body);
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.48px;
+}
+
+.lede strong {
+  font-weight: 700;
+}
+
+.carousel {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  outline: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel:focus-visible {
+  border-radius: 16px;
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.card {
+  display: flex;
+  width: 380.3px;
+  min-width: 380.3px;
+  flex-direction: column;
+  gap: 26px;
+  scroll-snap-align: start;
+  color: inherit;
+  text-decoration: none;
+}
+
+.imageFrame {
+  position: relative;
+  padding: 2.113px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--button);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  object-fit: cover;
+  user-select: none;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: -0.96px;
+}
+
+.cardBody {
+  width: 327px;
+  max-width: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-geist-sans), Geist, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.36px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.control {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  color: #1c1b1f;
+  background: #f3f4f1;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.controlActive {
+  color: #eff0eb;
+  background: var(--button);
+}
+
+.control:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.control svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.control:disabled {
+  cursor: default;
+}
+
+@media (max-width: 900px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 40px;
+  }
+
+  .card {
+    width: min(82vw, 380.3px);
+    min-width: min(82vw, 380.3px);
+  }
+
+  .cardTitle {
+    font-size: 27px;
+    line-height: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel {
+    scroll-behavior: auto;
+  }
+
+  .control {
+    transition: none;
+  }
+}

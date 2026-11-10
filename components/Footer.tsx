@@ -19,7 +19,6 @@ const COMPANY_LINKS = [
   { label: 'Fleet', href: '/fleet' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },
-  { label: 'Careers', href: '/careers' },
 ];
 
 const AREA_LINKS = [

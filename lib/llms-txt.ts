@@ -1,4 +1,5 @@
 import { FLEET, INCLUDED } from "@/lib/fleet";
+import { POSTS } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 import {
   PHONE_PRIMARY,
@@ -66,6 +67,11 @@ export function llmsTxt(): string {
       "/contact",
       `Quotes 24/7 by form, email, or phone (${PHONE_PRIMARY}). Most quotes return within 15 minutes.`,
     ),
+    fileLink(
+      "Blog",
+      "/blog",
+      "Guides on choosing a Boston car service, Logan pickups, and longer trips.",
+    ),
   ].join("\n");
 
   const services = SERVICES.map((service) =>
@@ -111,6 +117,10 @@ ${services}
 ## Fleet
 
 ${fleet}
+
+## Guides
+
+${POSTS.map((post) => fileLink(post.h1, `/blog/${post.slug}`, post.excerpt)).join("\n")}
 
 ## Optional
 

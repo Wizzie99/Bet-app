@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { FLEET } from "@/lib/fleet";
+import { POSTS } from "@/lib/posts";
 import { SERVICES } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/faq`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.6 },
   ];
 
   // Dynamic /services/[slug] pages.
@@ -32,8 +34,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...fleetRoutes].map((route) => ({
+  const postRoutes: MetadataRoute.Sitemap = POSTS.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: post.updatedAt,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...fleetRoutes, ...postRoutes].map((route) => ({
     ...route,
-    lastModified,
+    lastModified: route.lastModified ?? lastModified,
   }));
 }

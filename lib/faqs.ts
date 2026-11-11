@@ -5,19 +5,12 @@
 // match exactly, so never reword one without the other — they read from the
 // same data here.
 //
-// ⚠ Answers tagged `verify: true` contain details we couldn't confirm from the
-// rest of the site (child seats, alcohol policy, payment methods, exact Logan
-// pickup procedure, service radius, chauffeur credentials). Confirm the wording
-// with the business before launch. Dollar figures mirror lib/fleet.ts and are
-// placeholders inherited from the copy deck — keep them in agreement.
-
-import { PHONE_DISPLAY } from "@/lib/services";
+// Dollar figures mirror lib/fleet.ts and are placeholders inherited from the
+// copy deck — keep them in agreement.
 
 export type Faq = {
   q: string;
   a: string;
-  /** Flagged for owner review before launch; has no effect on rendering. */
-  verify?: boolean;
 };
 
 export type FaqGroup = {
@@ -51,7 +44,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         q: "How do I pay, and when am I charged?",
         a: "Payments run securely through Stripe and we never store your card. We hold the card on file when you book and charge after the trip is complete.",
-        verify: true,
       },
     ],
   },
@@ -82,7 +74,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         q: "Where do you pick up at Logan Airport?",
         a: "For arrivals we offer a meet-and-greet, where your chauffeur waits inside at baggage claim with a name sign, or a curbside pickup once you're outside the terminal — your choice when you book.",
-        verify: true,
       },
       {
         q: "What happens if my flight is delayed?",
@@ -114,12 +105,10 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         q: "Do you provide child seats?",
         a: "Yes — tell us the ages and we'll fit the right infant, convertible, or booster seat before pickup. Please request child seats when you book so the chauffeur has them installed and ready.",
-        verify: true,
       },
       {
         q: "Is alcohol allowed in the vehicle?",
         a: "Passengers of legal drinking age may enjoy alcohol on most occasion and event bookings; standard point-to-point and airport transfers are alcohol-free. Let us know the occasion and we'll confirm what's allowed.",
-        verify: true,
       },
     ],
   },
@@ -131,7 +120,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         q: "Are your chauffeurs licensed, insured, and background-checked?",
         a: "Yes. Every chauffeur is background-checked, fully licensed, and commercially insured, with an average of five years driving professionally.",
-        verify: true,
       },
       {
         q: "Will I know my chauffeur before the trip?",
@@ -170,7 +158,6 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         q: "What areas do you serve?",
         a: "We're based in Malden and serve Boston and Greater Boston — Cambridge, Brookline, Newton, Wellesley, the North Shore, and the surrounding suburbs — plus every regional airport.",
-        verify: true,
       },
       {
         q: "Do you do trips outside Boston, like New York or Cape Cod?",
@@ -202,7 +189,3 @@ export function faqJsonLd() {
     })),
   };
 }
-
-// Referenced so a future "still have questions?" block can surface the phone
-// number without re-importing; keeps the data layer self-documenting.
-export const FAQ_SUPPORT_PHONE = PHONE_DISPLAY;
